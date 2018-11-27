@@ -2,6 +2,11 @@
 
 Common tools to use in PHP applications.
 
+[![Latest Stable Version](https://poser.pugx.org/haijin/tools/version)](https://packagist.org/packages/haijin/tools)
+[![Latest Unstable Version](https://poser.pugx.org/haijin/tools/v/unstable)](https://packagist.org/packages/haijin/tools)
+[![Build Status](https://travis-ci.com/haijin-development/php-tools.svg?branch=v0.0.2)](https://travis-ci.com/haijin-development/php-tools)
+[![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
+
 ### Version 0.0.1
 
 This library is under active development and no stable version was released yet.
@@ -210,11 +215,4 @@ print $dictionary->remove_at( 'a' ); // 10
 
 ```
 composer test
-```
-
-<a name="c-4"></a>
-## Generating the api documentation
-
-```
-composer document
 ```

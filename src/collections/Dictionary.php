@@ -24,7 +24,7 @@ class Dictionary implements \ArrayAccess
      *
      * @return Dictionary The created Dictionary with the association in it.
      */
-    public function with($key, $value)
+    static public function with($key, $value)
     {
         return self::with_all( [ $key => $value ] );
     }
@@ -40,7 +40,7 @@ class Dictionary implements \ArrayAccess
      *
      * @return Dictionary The Dictionary with the associations in it.
      */
-    public function with_all($associations)
+    static public function with_all($associations)
     {
         return new self( $associations );
     }

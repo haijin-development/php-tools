@@ -23,7 +23,7 @@ class OrderedCollection implements \ArrayAccess
      *
      * @return OrderedCollection The OrderedCollection with the item in it.
      */
-    public function with($item)
+    static public function with($item)
     {
         return self::with_all( [ $item ] );
     }
@@ -39,7 +39,7 @@ class OrderedCollection implements \ArrayAccess
      *
      * @return OrderedCollection The OrderedCollection with the items in it.
      */
-    public function with_all($items)
+    static public function with_all($items)
     {
         return new self( $items );
     }
