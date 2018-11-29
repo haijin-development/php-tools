@@ -184,7 +184,11 @@ class Dictionary implements \ArrayAccess
                 $binding = $this;
             }
 
-            return $absent_closure->call( $binding, $this, $key );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding, $this, $key );
+            } else {
+                return $absent_closure;
+            }
         }
 
         return $this->associations[ $key ];

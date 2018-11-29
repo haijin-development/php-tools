@@ -176,6 +176,9 @@ class OrderedCollectionTest extends TestCase
 
         $item = $collection->at_if_absent( 3, function() { return 'not found'; });
         $this->assertEquals( 'not found', $item );
+
+        $item = $collection->at_if_absent( 3, 'not found' );
+        $this->assertEquals( 'not found', $item );
     }
 
     public function testAtIfAbsentWithNegativeIndex()

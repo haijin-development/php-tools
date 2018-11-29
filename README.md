@@ -7,7 +7,7 @@ Common tools to use in PHP applications.
 [![Build Status](https://travis-ci.com/haijin-development/php-tools.svg?branch=v0.0.2)](https://travis-ci.com/haijin-development/php-tools)
 [![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
 
-### Version 0.0.1
+### Version 0.0.2
 
 This library is under active development and no stable version was released yet.
 
@@ -37,7 +37,7 @@ Include this library in your project `composer.json` file:
 
     "require": {
         ...
-        "haijin/tools": "^0.0.1",
+        "haijin/tools": "^0.0.2",
         ...
     },
 
@@ -199,6 +199,8 @@ print $dictionary['a']; // => 10
 print $dictionary->at_if_absent( 'c', function() {
     return 0;
 }); // 0
+
+print $dictionary->at_if_absent( 'c', 0 ); // 0
 
 $dictionary->keys_and_values_do( function($key, $value) {
     print $key . " => " . $value . ", ";

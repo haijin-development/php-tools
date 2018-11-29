@@ -249,7 +249,11 @@ class OrderedCollection implements \ArrayAccess
                 $binding = $this;
             }
 
-            return $absent_closure->call( $binding, $this, $index );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding, $this, $index );
+            } else {
+                return $absent_closure;
+            }
         }
 
         if( $index < 0 ) {

@@ -113,6 +113,9 @@ class DictionaryTest extends TestCase
 
         $value = $dictionary->at_if_absent( 'd', function() { return 'not found'; });
         $this->assertEquals( 'not found', $value );
+
+        $value = $dictionary->at_if_absent( 'd', 'not found' );
+        $this->assertEquals( 'not found', $value );
     }
 
     public function testAtPut()
