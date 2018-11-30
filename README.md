@@ -24,7 +24,6 @@ If you like it a lot you may contribute by financing its development. Please con
     5. [OrderedCollection](#c-2-5)
     6. [Dictionary](#c-2-6)
 3. [Running the tests](#c-3)
-4. [Generating the api documentation](#c-4)
 
 <a name="c-1"></a>
 ## Installation
