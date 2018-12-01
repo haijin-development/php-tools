@@ -363,7 +363,11 @@ class OrderedCollection implements \ArrayAccess
                 $binding = $this;
             }
 
-            return $absent_closure->call( $binding, $this, $index );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding, $this, $index );
+            } else {
+                return $absent_closure;
+            }
         }
 
         if( $index < 0 ) {
@@ -459,7 +463,11 @@ class OrderedCollection implements \ArrayAccess
         $index = $this->find_first_index( $closure, $binding );
 
         if( $index == -1 ) {
-            return $absent_closure->call( $binding );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding );
+            } else {
+                return $absent_closure;
+            }
         }
 
         return $this->at( $index );
@@ -543,7 +551,11 @@ class OrderedCollection implements \ArrayAccess
         $index = $this->find_last_index( $closure, $binding );
 
         if( $index == -1 ) {
-            return $absent_closure->call( $binding );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding );
+            } else {
+                return $absent_closure;
+            }
         }
 
         return $this->at( $index );

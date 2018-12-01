@@ -55,7 +55,8 @@ class Dictionary implements \ArrayAccess
     /**
      * Initializes $this object with an optional array of associations in it.
      *
-     * @param array|Dictionary $items Optional - An array or Dictionary with associations to add to $this Dictionary.
+     * @param array|Dictionary $items Optional - An array or Dictionary with associations
+     *      to add to $this Dictionary.
      */
     public function __construct($associations = [])
     {
@@ -269,8 +270,8 @@ class Dictionary implements \ArrayAccess
      * @param callable $absent_closure A closure to evaluate of the key to remove is not defined.
      * @param object $binding An optional object to bind to the absent_closure.
      *
-     * @return object The value of the association removed, or if the key is not defined the result of evaluating
-     *      the absent closure.
+     * @return object The value of the association removed, or if the key is not defined the
+     *      result of evaluating the absent closure.
      */
     public function remove_at_if_absent($key, $absent_closure, $binding = null)
     {
@@ -279,7 +280,11 @@ class Dictionary implements \ArrayAccess
                 $binding = $this;
             }
 
-            return $absent_closure->call( $binding, $this, $key );
+            if( is_callable( $absent_closure ) ) {
+                return $absent_closure->call( $binding, $this, $key );
+            } else {
+                return $absent_closure;
+            }
         }
 
         $value = $this->associations[ $key ];

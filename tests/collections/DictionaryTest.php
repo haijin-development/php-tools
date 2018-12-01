@@ -186,6 +186,12 @@ class DictionaryTest extends TestCase
 
         $this->assertEquals( "default value", $value );
         $this->assertEquals( [ 'a' => 1, 'b' => 2, 'c' => 3 ], $dictionary->to_array() );
+
+
+        $value = $dictionary->remove_at_if_absent( 'd', "default value" );
+
+        $this->assertEquals( "default value", $value );
+        $this->assertEquals( [ 'a' => 1, 'b' => 2, 'c' => 3 ], $dictionary->to_array() );
     }
 
     /// Test iterating

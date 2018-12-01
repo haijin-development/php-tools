@@ -381,6 +381,11 @@ class OrderedCollectionTest extends TestCase
 
         $this->assertEquals( "absent index", $item );
         $this->assertEquals( [ 1, 2, 3 ], $collection->to_array() );
+
+        $item = $collection->remove_at_if_absent( 3, "absent index" );
+
+        $this->assertEquals( "absent index", $item );
+        $this->assertEquals( [ 1, 2, 3 ], $collection->to_array() );
     }
 
     /// Test iterating
