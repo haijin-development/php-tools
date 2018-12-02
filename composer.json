@@ -2,7 +2,7 @@
     "name": "haijin/tools",
     "description": "Common tools to use in PHP applications.",
     "keywords": ["utilities", "path", "collections"],
-    "version": "0.0.2",
+    "version": "0.0.3",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/haijin-development/php-tools",
