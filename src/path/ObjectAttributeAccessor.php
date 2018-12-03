@@ -201,7 +201,7 @@ class ObjectAttributeAccessor
 
             $key = $this->get_key_from( $attribute );
 
-            if( ! array_key_exists( $key, $current_value ) )
+            if( $current_value === null || ! array_key_exists( $key, $current_value ) )
                 return is_callable( $absent_value ) ? $absent_value->call( $this, $partial_path ) : $absent_value;
 
             if( is_array( $current_value ) )
