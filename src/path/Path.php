@@ -34,7 +34,7 @@ abstract class Path
         $this->path = [];
         $this->separator = $this->default_separator();
 
-        if( $attributes_chain != null )
+        if( $attributes_chain !== null )
             $this->path = $this->normalize_attributes_chain( $attributes_chain );
     }
 
@@ -201,7 +201,7 @@ abstract class Path
      */
     public function to_string($separator = null)
     {
-        if( $separator == null ) {
+        if( $separator === null ) {
             $separator = $this->separator;
         }
 

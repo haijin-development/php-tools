@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42b9489946402544973b030939d36de5",
+    "content-hash": "e6459cdfc9e55b5e5ae40cb526f2d87f",
     "packages": [],
     "packages-dev": [
         {
@@ -63,20 +63,19 @@
         },
         {
             "name": "haijin/testing",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haijin-development/php-testing.git",
-                "reference": "1d931c0b68fcff9bf22e8632d811ffd123740af4"
+                "reference": "ebbb4325d40a5a4f448fe66169e8ce57f3a95223"
             },
             "dist": {
-                "type": "path",
-                "url": "https://api.github.com/repos/haijin-development/php-testing/zipball/1d931c0b68fcff9bf22e8632d811ffd123740af4",
-                "reference": "1d931c0b68fcff9bf22e8632d811ffd123740af4",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/haijin-development/php-testing/zipball/ebbb4325d40a5a4f448fe66169e8ce57f3a95223",
+                "reference": "ebbb4325d40a5a4f448fe66169e8ce57f3a95223",
+                "shasum": ""
             },
             "require-dev": {
-                "phpdocumentor/phpdocumentor": "2.*",
                 "phpunit/phpunit": "^7.4"
             },
             "type": "library",
@@ -85,14 +84,7 @@
                     "Haijin\\Testing\\": "src/"
                 }
             },
-            "scripts": {
-                "test": [
-                    "./vendor/bin/phpunit tests/ --bootstrap vendor/autoload.php"
-                ],
-                "document": [
-                    "./vendor/bin/phpdoc -d src/ -t documentation/api"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -107,14 +99,12 @@
             "description": "Extensions to PHPUnit to ease testing and improve tests expressiveness.",
             "homepage": "https://github.com/haijin-development/php-testing",
             "keywords": [
-                "PHPUnit",
                 "assertions",
                 "expectations",
+                "phpunit",
                 "testing"
             ],
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2018-12-06T15:38:17+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -735,16 +725,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.4.4",
+            "version": "7.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b1be2c8530c4c29c3519a052c9fb6cee55053bbd"
+                "reference": "61d34e8dd6eb3555900f0f2a2fa9e7e570730102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b1be2c8530c4c29c3519a052c9fb6cee55053bbd",
-                "reference": "b1be2c8530c4c29c3519a052c9fb6cee55053bbd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/61d34e8dd6eb3555900f0f2a2fa9e7e570730102",
+                "reference": "61d34e8dd6eb3555900f0f2a2fa9e7e570730102",
                 "shasum": ""
             },
             "require": {
@@ -765,7 +755,7 @@
                 "phpunit/php-timer": "^2.0",
                 "sebastian/comparator": "^3.0",
                 "sebastian/diff": "^3.0",
-                "sebastian/environment": "^3.1 || ^4.0",
+                "sebastian/environment": "^4.0",
                 "sebastian/exporter": "^3.1",
                 "sebastian/global-state": "^2.0",
                 "sebastian/object-enumerator": "^3.0.3",
@@ -815,7 +805,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-11-14T16:52:02+00:00"
+            "time": "2018-12-03T05:01:24+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

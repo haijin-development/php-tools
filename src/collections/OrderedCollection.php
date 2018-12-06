@@ -245,7 +245,7 @@ class OrderedCollection implements \ArrayAccess
     public function at_if_absent($index, $absent_closure, $binding = null)
     {
         if( ! $this->index_is_in_range($index) ) {
-            if( $binding == null ){
+            if( $binding === null ){
                 $binding = $this;
             }
 
@@ -359,7 +359,7 @@ class OrderedCollection implements \ArrayAccess
     public function remove_at_if_absent($index, $absent_closure, $binding = null)
     {
         if( ! $this->index_is_in_range($index) ) {
-            if( $binding == null ) {
+            if( $binding === null ) {
                 $binding = $this;
             }
 
@@ -456,7 +456,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function find_first_if_absent($closure, $absent_closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -490,7 +490,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function find_first_index($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -544,7 +544,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function find_last_if_absent($closure, $absent_closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -578,7 +578,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function find_last_index($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -607,7 +607,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function each_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -636,7 +636,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function each_with_index_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -664,7 +664,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function reverse_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -692,7 +692,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function select($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -723,7 +723,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function collect($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -754,7 +754,7 @@ class OrderedCollection implements \ArrayAccess
      */
     public function acummulate($acummulator, $closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -833,7 +833,7 @@ class OrderedCollection implements \ArrayAccess
 
     public function offsetSet( $offset , $value )
     {
-        if( $offset == null ) {
+        if( $offset === null ) {
             $offset = $this->size();
         }
 

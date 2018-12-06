@@ -181,7 +181,7 @@ class Dictionary implements \ArrayAccess
     public function at_if_absent($key, $absent_closure, $binding = null)
     {
         if( ! $this->has_key($key) ) {
-            if( $binding == null ){
+            if( $binding === null ){
                 $binding = $this;
             }
 
@@ -276,7 +276,7 @@ class Dictionary implements \ArrayAccess
     public function remove_at_if_absent($key, $absent_closure, $binding = null)
     {
         if( ! $this->has_key($key) ) {
-            if( $binding == null ) {
+            if( $binding === null ) {
                 $binding = $this;
             }
 
@@ -327,7 +327,7 @@ class Dictionary implements \ArrayAccess
      */
     public function keys_and_values_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -355,7 +355,7 @@ class Dictionary implements \ArrayAccess
      */
     public function keys_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 
@@ -383,7 +383,7 @@ class Dictionary implements \ArrayAccess
      */
     public function values_do($closure, $binding = null)
     {
-        if( $binding == null ) {
+        if( $binding === null ) {
             $binding = $this;
         }
 

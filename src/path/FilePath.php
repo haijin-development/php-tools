@@ -278,7 +278,7 @@ class FilePath extends Path
      */
     public function to_string($separator = null)
     {
-        if( $separator == null )
+        if( $separator === null )
             $separator = $this->separator;
 
         if( $this->is_absolute ) {

@@ -7,7 +7,7 @@ Common tools to use in PHP applications.
 [![Build Status](https://travis-ci.com/haijin-development/php-tools.svg?branch=v0.0.2)](https://travis-ci.com/haijin-development/php-tools)
 [![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
 
-### Version 0.0.3
+### Version 0.0.4
 
 This library is under active development and no stable version was released yet.
 
@@ -36,7 +36,7 @@ Include this library in your project `composer.json` file:
 
     "require": {
         ...
-        "haijin/tools": "^0.0.3",
+        "haijin/tools": "^0.0.4",
         ...
     },
 
