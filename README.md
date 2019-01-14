@@ -215,5 +215,5 @@ print $dictionary->remove_at( 'a' ); // 10
 ## Running the tests
 
 ```
-composer test
+composer specs
 ```
