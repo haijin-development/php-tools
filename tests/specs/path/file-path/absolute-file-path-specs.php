@@ -1,11 +1,11 @@
 <?php
 
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
-$spec->describe( "An absolute FilePath", function() {
+$spec->describe( "An absolute File_Path", function() {
 
     $this->it( "is relative by default", function() {
-        $file_path = new FilePath();
+        $file_path = new File_Path();
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "" );
 
@@ -16,7 +16,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "is created from a string", function() {
 
-        $file_path = new FilePath( '/home' );
+        $file_path = new File_Path( '/home' );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "/home" );
 
@@ -27,7 +27,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "is created from an array", function() {
 
-        $file_path = new FilePath( [ '/home' ] );
+        $file_path = new File_Path( [ '/home' ] );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "/home" );
 
@@ -38,7 +38,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "is created from another absolute path", function() {
 
-        $file_path = new FilePath( new FilePath( '/home' ) );
+        $file_path = new File_Path( new File_Path( '/home' ) );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "/home" );
 
@@ -49,7 +49,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "preserves the absoluteness when concatenanting a path", function() {
 
-        $file_path = new FilePath( '/home' );
+        $file_path = new File_Path( '/home' );
 
         $concatenated_file_path = $file_path->concat( 'dev/src' );
 
@@ -62,7 +62,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "preserves the absoluteness when appending a path", function() {
 
-        $file_path = new FilePath( '/home' );
+        $file_path = new File_Path( '/home' );
 
         $concatenated_file_path = $file_path->append( 'dev/src' );
 
@@ -75,7 +75,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "preserves the absoluteness when going back a path", function() {
 
-        $file_path = new FilePath( '/home/dev/src' );
+        $file_path = new File_Path( '/home/dev/src' );
 
         $backed_file_path = $file_path->back();
 
@@ -88,7 +88,7 @@ $spec->describe( "An absolute FilePath", function() {
 
     $this->it( "preserves the absoluteness when dropping a path", function() {
 
-        $file_path = new FilePath( '/home/dev/src' );
+        $file_path = new File_Path( '/home/dev/src' );
 
         $file_path->drop();
 

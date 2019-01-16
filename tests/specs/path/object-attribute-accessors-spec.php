@@ -1,8 +1,8 @@
 <?php
 
-use Haijin\Tools\ObjectAttributeAccessor;
+use Haijin\Object_Attribute_Accessor;
 
-$spec->describe( "An ObjectAttributeAccessor", function() {
+$spec->describe( "An Object_Attribute_Accessor", function() {
 
     $this->it( "gets an existing attribute", function() {
 
@@ -14,7 +14,7 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
 
         $this->expect( $accessor->get_value_at( "name" ) ) ->to() ->equal( "Lisa" );
 
@@ -32,7 +32,7 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
 
         $this->expect(
 
@@ -60,14 +60,14 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
 
         $this->expect( function() use($accessor) {
 
                 $accessor->get_value_at( "address.number" );
 
         }) ->to() ->raise(
-            "Haijin\Tools\MissingAttributeError",
+            "Haijin\Missing_Attribute_Error",
             function($error) use($object) {
 
                 $this->expect( $error->getMessage() ) ->to()
@@ -92,7 +92,7 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
         $accessor->set_value_at( "address.street", "Evergreen" );
 
         $this->expect( $object["address"]["street"] ) ->to() ->equal( "Evergreen" );
@@ -109,14 +109,14 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
 
         $this->expect( function() use($accessor) {
 
                 $accessor->set_value_at( "address.number", 742 );
 
         }) ->to() ->raise(
-            "Haijin\Tools\MissingAttributeError",
+            "Haijin\Missing_Attribute_Error",
             function($error) use($object) {
 
                 $this->expect( $error->getMessage() ) ->to()
@@ -138,7 +138,7 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             "last_name" => "Simpson",
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
         $accessor->create_value_at( "addresses.[0].address.number", 742 );
 
         $this->expect( $object["addresses"][0]["address"]["number"] ) ->to() ->equal( 742 );
@@ -158,7 +158,7 @@ $spec->describe( "An ObjectAttributeAccessor", function() {
             ]
         ];
 
-        $accessor = new ObjectAttributeAccessor( $object );
+        $accessor = new Object_Attribute_Accessor( $object );
         $accessor->create_value_at( "addresses.[0].address.number", 742 );
 
         $this->expect( $object["addresses"][0]["address"]["street"] ) ->to()

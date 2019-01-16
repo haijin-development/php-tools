@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Haijin\Tools\ObjectAttributeAccessor;
+use Haijin\Object_Attribute_Accessor;
 
 print "\n### Reads an attribute from an associative array\n";
 
@@ -14,21 +14,21 @@ $user = [
     ]
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( 'address.street' );
 
 print( $value . "\n" );
 
 print "\n### Reads an attribute and if it is missing evaluates a closure\n";
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at_if_absent( "address.number",  function() { return "Absent value"; });
 
 print( $value . "\n" );
 
 print "\n### Reads an attribute and if it is missing returns a constant\n";
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at_if_absent( "address.number",  "Absent value" );
 
 print( $value . "\n" );
@@ -44,7 +44,7 @@ $user = [
     ]
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->set_value_at( 'address.street', 123 );
 
 var_dump( $user );
@@ -56,7 +56,7 @@ $user = [
     'last_name' => 'Simpson',
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->create_value_at( 'address.street', 123 );
 
 var_dump( $user );
@@ -65,7 +65,7 @@ print "\nReads an attribute from an indexed array\n";
 
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( '[1].[0]' );
 
 print( $value . "\n" );
@@ -74,7 +74,7 @@ print "\n### Writes an attribute to an indexed array\n";
 
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->set_value_at( '[1].[0]', 123 );
 
 var_dump( $user );
@@ -86,7 +86,7 @@ $user = [
     'last_name' => 'Simpson',
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->create_value_at( 'addresses[0].address.street', 123 );
 
 var_dump( $user );
@@ -99,7 +99,7 @@ $user->last_name = 'Simpson';
 $user->address = new stdclass();
 $user->address->street = 'Evergreen 742';
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( 'address.street' );
 
 print( $value . "\n" );
@@ -112,7 +112,7 @@ $user->last_name = 'Simpson';
 $user->address = new stdclass();
 $user->address->street = 'Evergreen 742';
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->set_value_at( 'address.street', 123 );
 
 var_dump( $user );

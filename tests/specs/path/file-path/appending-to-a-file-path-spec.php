@@ -1,12 +1,12 @@
 <?php
 
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
-$spec->describe( "When appending to a FilePath", function() {
+$spec->describe( "When appending to a File_Path", function() {
 
     $this->it( "testConcatenatesAString", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( 'dev/src' );
+        $file_path = ( new File_Path( 'home' ) )->append( 'dev/src' );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
 
@@ -14,7 +14,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testConcatenatesAnEmptyString", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( '' );
+        $file_path = ( new File_Path( 'home' ) )->append( '' );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home' );
 
@@ -22,7 +22,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testConcatenatesAnArray", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( [ 'dev', 'src' ] );
+        $file_path = ( new File_Path( 'home' ) )->append( [ 'dev', 'src' ] );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
 
@@ -31,7 +31,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testConcatenatesAnEmptyArray", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( [] );
+        $file_path = ( new File_Path( 'home' ) )->append( [] );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home' );
 
@@ -39,7 +39,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testConcatenatesAnFilePath", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( new FilePath( 'dev/src' ) );
+        $file_path = ( new File_Path( 'home' ) )->append( new File_Path( 'dev/src' ) );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
 
@@ -47,7 +47,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testConcatenatesAnEmptyPath", function() {
 
-        $file_path = ( new FilePath( 'home' ) )->append( new FilePath() );
+        $file_path = ( new File_Path( 'home' ) )->append( new File_Path() );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home' );
 
@@ -55,7 +55,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testModifiesTheReceiverInstance", function() {
 
-        $file_path = new FilePath( 'home' );
+        $file_path = new File_Path( 'home' );
         $file_path->append( 'dev/src' );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
@@ -64,7 +64,7 @@ $spec->describe( "When appending to a FilePath", function() {
 
     $this->it( "testReturnsThisInstance", function() {
 
-        $file_path = new FilePath( 'home' );
+        $file_path = new File_Path( 'home' );
         $concatenated_path = $file_path->append( 'dev/src' );
 
         $this->expect( $concatenated_path ) ->to() ->be( "===" ) ->than( $file_path );

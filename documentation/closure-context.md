@@ -1,12 +1,12 @@
-# ClosureContext
+# Closure_Context
 
 A class to keep and later evaluate a closure in the context of an object.
 
 ## Table of contents
 
 1. [Examples](#c-1)
-    1. [Creating ClosureContexts](#c-1-1)
-    2. [Evaluating ClosureContexts](#c-1-2)
+    1. [Creating Closure_Contexts](#c-1-1)
+    2. [Evaluating Closure_Contexts](#c-1-2)
 
 <a name="c-1"></a>
 ## Examples
@@ -15,12 +15,12 @@ A class to keep and later evaluate a closure in the context of an object.
 
 
 <a name="c-1-1"></a>
-### Creating ClosureContexts
+### Creating Closure_Contexts
 
-Create a ClosureContext from any object and a closure:
+Create a Closure_Context from any object and a closure:
 
 ```php
-use Haijin\Tools\ClosureContext;
+use Haijin\Closure_Context;
 
 // Create a sample object
 
@@ -35,9 +35,9 @@ class SampleClass
 $object = new SampleClass();
 
 
-// Create a ClosureContext from a closure and bind it to $object.
+// Create a Closure_Context from a closure and bind it to $object.
 
-$closure = new ClosureContext( $object, function($a, $b) {
+$closure = new Closure_Context( $object, function($a, $b) {
     var_dump( $this );
 
     return $this->sum( $a, $b );
@@ -45,9 +45,9 @@ $closure = new ClosureContext( $object, function($a, $b) {
 ```
 
 <a name="c-1-2"></a>
-### Evaluating ClosureContexts
+### Evaluating Closure_Contexts
 
-Evaluate the ClosureContext.
+Evaluate the Closure_Context.
 
 Within its held closure `$this` will point to its held object.
 

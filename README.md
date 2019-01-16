@@ -4,12 +4,12 @@ Common tools to use in PHP applications.
 
 [![Latest Stable Version](https://poser.pugx.org/haijin/tools/version)](https://packagist.org/packages/haijin/tools)
 [![Latest Unstable Version](https://poser.pugx.org/haijin/tools/v/unstable)](https://packagist.org/packages/haijin/tools)
-[![Build Status](https://travis-ci.org/haijin-development/php-tools.svg?branch=v0.0.2)](https://travis-ci.org/haijin-development/php-tools)
+[![Build Status](https://travis-ci.org/haijin-development/php-tools.svg?branch=v0.1.0)](https://travis-ci.org/haijin-development/php-tools)
 [![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
 
-### Version 0.0.4
+### Version 0.1.0
 
-This library is under active development and no stable version was released yet.
+This is the pre-release of version v1.0.0.
 
 If you like it a lot you may contribute by [financing](https://github.com/haijin-development/support-haijin-development) its development.
 
@@ -17,11 +17,11 @@ If you like it a lot you may contribute by [financing](https://github.com/haijin
 
 1. [Installation](#c-1)
 2. [Available tools](#c-2)
-    1. [AttributePath](#c-2-1)
-    2. [FilePath](#c-2-2)
+    1. [Attribute_Path](#c-2-1)
+    2. [File_Path](#c-2-2)
     3. [Object accessor](#c-2-3)
-    4. [ClosureContext](#c-2-4)
-    5. [OrderedCollection](#c-2-5)
+    4. [Closure_Context](#c-2-4)
+    5. [Ordered_Collection](#c-2-5)
     6. [Dictionary](#c-2-6)
 3. [Running the tests](#c-3)
 
@@ -36,7 +36,7 @@ Include this library in your project `composer.json` file:
 
     "require": {
         ...
-        "haijin/tools": "^0.0.4",
+        "haijin/tools": "^0.1.0",
         ...
     },
 
@@ -48,12 +48,12 @@ Include this library in your project `composer.json` file:
 ## Available tools
 
 <a name="c-2-1"></a>
-### AttributePath
+### Attribute_Path
 
-An AttributePath is a sequence of attributes from a root object to a nested attribute of that object.
+An Attribute_Path is a sequence of attributes from a root object to a nested attribute of that object.
 
 ```php
-$path = new AttributePath( "user.address" );
+$path = new Attribute_Path( "user.address" );
 $path = $path->concat( "street" );
 
 print $path->to_string(); // "user.address.street"
@@ -74,16 +74,16 @@ $path = $path->back();
 print $path; // "user.address"
 ```
 
-* [AttributePath protocol](./documentation/attribute-path.md).
-* [AttributePath examples](./documentation/attribute-path-examples.php).
+* [Attribute_Path protocol](./documentation/attribute-path.md).
+* [Attribute_Path examples](./documentation/attribute-path-examples.php).
 
 <a name="c-2-2"></a>
-### FilePath
+### File_Path
 
 A path to a file or folder.
 
 ```php
-$path = new FilePath( "home/dev" );
+$path = new File_Path( "home/dev" );
 $path = $path->concat( "src" );
 
 print $path->to_string(); // "home/dev/src"
@@ -93,8 +93,8 @@ $path = $path->back();
 print $path; // "home/dev"
 ```
 
-* [FilePath protocol](./documentation/attribute-path.md#c-3).
-* [FilePath examples](./documentation/file-path-examples.php).
+* [File_Path protocol](./documentation/attribute-path.md#c-3).
+* [File_Path examples](./documentation/file-path-examples.php).
 
 <a name="c-2-3"></a>
 ### Object accessor
@@ -112,21 +112,21 @@ $user = [
     ]
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $accessor->set_value_at( "addresses.[0].street", "Evergreen 742" );
 print $accessor->get_value_at( "addresses.[0].street" ); // Evergreen 742
 ```
 
-* [ObjectAttributeAccessor protocol](./documentation/object-attribute-accessor.md).
-* [ObjectAttributeAccessor examples](./documentation/object-attribute-accessor-examples.php).
+* [Object_Attribute_Accessor protocol](./documentation/object-attribute-accessor.md).
+* [Object_Attribute_Accessor examples](./documentation/object-attribute-accessor-examples.php).
 
 <a name="c-2-4"></a>
-### ClosureContext
+### Closure_Context
 
 A class to keep and evaluate a closure in the context of an object.
 
 ```php
-$closure_context = ClosureContext( $object, function() {
+$closure_context = Closure_Context( $object, function() {
     print $this === $object;
     return $this->do_something();
 });
@@ -134,18 +134,18 @@ $closure_context = ClosureContext( $object, function() {
 $closure_context->evaluate(); // true
 ```
 
-* [ClosureContext protocol](./documentation/closure-context.md).
-* [ClosureContext examples](./documentation/closure-context-examples.php).
+* [Closure_Context protocol](./documentation/closure-context.md).
+* [Closure_Context examples](./documentation/closure-context-examples.php).
 
 <a name="c-2-5"></a>
-### OrderedCollection
+### Ordered_Collection
 
 An alternative to using PHP arrays for indexed collections.
 
 It is always passed by reference and has a consistent, simple and complete protocol.
 
 ```php
-$ordered_collection = OrderedCollection::with_all( [ 10, 20, 30 ] );
+$ordered_collection = Ordered_Collection::with_all( [ 10, 20, 30 ] );
 $ordered_collection[] = 40;
 
 print $ordered_collection[0]; // => 10
@@ -175,7 +175,7 @@ $ordered_collection->each_do( function($each) {
 print $ordered_collection->remove_at( 0 ); // 10
 ```
 
-* [OrderedCollection protocol](./documentation/ordered-collection.md).
+* [Ordered_Collection protocol](./documentation/ordered-collection.md).
 
 <a name="c-2-6"></a>
 ### Dictionary

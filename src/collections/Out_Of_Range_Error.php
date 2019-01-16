@@ -1,8 +1,8 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
-class OutOfRangeError extends \Exception
+class Out_Of_Range_Error extends \Exception
 {
     public function __construct($message, $collection, $index)
     {

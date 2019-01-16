@@ -1,13 +1,13 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
 /**
  * A wrapper on an object to access its nested attributes with a single message.
  *
  * Examples:
  *
- *      use Haijin\Tools\ObjectAttributeAccessor;
+ *      use Haijin\Object_Attribute_Accessor;
  *
  *      /// Reads an attribute from an associative array
  *      
@@ -19,21 +19,21 @@ namespace Haijin\Tools;
  *          ]
  *      ];
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->get_value_at( 'address.street' );
  *      
  *      print( $value . "\n" );
  *      
  *      /// Reads an attribute and if it is missing evaluates a closure
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->get_value_at_if_absent( "address.number",  function() { return "Absent value"; })
  *
  *      print( $value . "\n" );
  *
  *      /// Reads an attribute and if it is missing returns a constant
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->get_value_at_if_absent( "address.number",  "Absent value" )
  *
  *      print( $value . "\n" );
@@ -48,7 +48,7 @@ namespace Haijin\Tools;
  *          ]
  *      ];
  *
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->set_value_at( 'address.street', 123 );
  *      
  *      var_dump( $user );
@@ -60,7 +60,7 @@ namespace Haijin\Tools;
  *          'last_name' => 'Simpson',
  *      ];
  *
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->create_value_at( 'address.street', 123 );
  *
  *      var_dump( $user );
@@ -69,7 +69,7 @@ namespace Haijin\Tools;
  *      
  *      $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->get_value_at( '[1].[0]' );
  *
  *      print( $value . "\n" );
@@ -78,7 +78,7 @@ namespace Haijin\Tools;
  *      
  *      $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->set_value_at( '[1].[0]', 123 );
  *
  *      var_dump( $user );
@@ -91,7 +91,7 @@ namespace Haijin\Tools;
  *      $user->address = new stdclass();
  *      $user->address->street = 'Evergreen 742';
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->get_value_at( 'address.street' );
  *      
  *      print( $value . "\n" );
@@ -104,12 +104,12 @@ namespace Haijin\Tools;
  *      $user->address = new stdclass();
  *      $user->address->street = 'Evergreen 742';
  *      
- *      $accessor = new ObjectAttributeAccessor( $user );
+ *      $accessor = new Object_Attribute_Accessor( $user );
  *      $value = $accessor->set_value_at( 'address.street', 123 );
  *      
  *      var_dump( $user );
  */
-class ObjectAttributeAccessor
+class Object_Attribute_Accessor
 {
     /**
      * The object which attributes are to be read and written.
@@ -131,14 +131,14 @@ class ObjectAttributeAccessor
     /**
      * Returns true if the object has the attribute defined, false otherwise.
      *
-     * @param AttributePath $attribute_path The attribute to read from $this->object.
+     * @param Attribute_Path $attribute_path The attribute to read from $this->object.
      *
      * @return boolean Returns true if the object has the attribute defined, false otherwise.
      */
     public function is_defined($attribute_path)
     {
-        if( ! is_a( $attribute_path, "Haijin\Tools\AttributePath" ) ) {
-            $attribute_path = new AttributePath( $attribute_path );
+        if( ! is_a( $attribute_path, "Haijin\Attribute_Path" ) ) {
+            $attribute_path = new Attribute_Path( $attribute_path );
         }
 
         $current_value =& $this->object;
@@ -162,7 +162,7 @@ class ObjectAttributeAccessor
     /**
      * Returns true if the object has not the attribute defined, false if it is defined.
      *
-     * @param AttributePath $attribute_path The attribute to read from $this->object.
+     * @param Attribute_Path $attribute_path The attribute to read from $this->object.
      *
      * @return boolean Returns true if the object has not the attribute defined, false if it is defined.
      */
@@ -176,7 +176,7 @@ class ObjectAttributeAccessor
     /**
      * Reads the value of the object attribute.
      *
-     * @param AttributePath $attribute_path The attribute to read from $this->object.
+     * @param Attribute_Path $attribute_path The attribute to read from $this->object.
      *
      * @return object The value of the attribute obtained from the object.
      */
@@ -189,12 +189,12 @@ class ObjectAttributeAccessor
 
     public function get_value_at_if_absent($attribute_path, $absent_value)
     {
-        if( ! is_a( $attribute_path, "Haijin\Tools\AttributePath" ) ) {
-            $attribute_path = new AttributePath( $attribute_path );
+        if( ! is_a( $attribute_path, "Haijin\Attribute_Path" ) ) {
+            $attribute_path = new Attribute_Path( $attribute_path );
         }
 
         $current_value =& $this->object;
-        $partial_path = new AttributePath();
+        $partial_path = new Attribute_Path();
 
         foreach( $attribute_path->to_array() as $attribute ) {
             $partial_path->append( $attribute );
@@ -202,7 +202,7 @@ class ObjectAttributeAccessor
             $key = $this->get_key_from( $attribute );
 
             if( $current_value === null || ! array_key_exists( $key, $current_value ) )
-                return is_callable( $absent_value ) ? $absent_value->call( $this, $partial_path ) : $absent_value;
+                return ( $absent_value instanceof \Closure ) ? $absent_value->call( $this, $partial_path ) : $absent_value;
 
             if( is_array( $current_value ) )
                 $current_value =& $current_value[ $key ];
@@ -214,22 +214,22 @@ class ObjectAttributeAccessor
     }
 
     /**
-     * Writes the value to the object attribute. Raises a MissingAttributeError if the attribute path does not exist.
+     * Writes the value to the object attribute. Raises a Missing_Attribute_Error if the attribute path does not exist.
      *
-     * @param AttributePath $attribute_path The attribute to read from $this->object.
+     * @param Attribute_Path $attribute_path The attribute to read from $this->object.
      * @param object $value The value to be written to the object.
      *
-     * @return ObjectAttributeAccessor $this object.
+     * @return Object_Attribute_Accessor $this object.
      */
     public function set_value_at($attribute_path, $value)
     {
-        if( ! is_a( $attribute_path, "Haijin\Tools\AttributePath" ) ) {
-            $attribute_path = new AttributePath( $attribute_path );
+        if( ! is_a( $attribute_path, "Haijin\Attribute_Path" ) ) {
+            $attribute_path = new Attribute_Path( $attribute_path );
         }
 
         $current_value =& $this->object;
 
-        $partial_path = new AttributePath();
+        $partial_path = new Attribute_Path();
 
         foreach( $attribute_path->back()->to_array() as $attribute ) {
             $partial_path->append( $attribute );
@@ -263,20 +263,20 @@ class ObjectAttributeAccessor
     /**
      * Writes the value to the object attribute. If the attribute path does not exists it creates it.
      *
-     * @param AttributePath $attribute_path The attribute to read from $this->object.
+     * @param Attribute_Path $attribute_path The attribute to read from $this->object.
      * @param object $value The value to be written to the object.
      *
-     * @return ObjectAttributeAccessor $this object.
+     * @return Object_Attribute_Accessor $this object.
      */
     public function create_value_at($attribute_path, $value)
     {
-        if( ! is_a( $attribute_path, "Haijin\Tools\AttributePath" ) ) {
-            $attribute_path = new AttributePath( $attribute_path );
+        if( ! is_a( $attribute_path, "Haijin\Attribute_Path" ) ) {
+            $attribute_path = new Attribute_Path( $attribute_path );
         }
 
         $current_value =& $this->object;
 
-        $partial_path = new AttributePath();
+        $partial_path = new Attribute_Path();
 
         foreach( $attribute_path->back()->to_array() as $attribute ) {
             $partial_path->append( $attribute );
@@ -328,10 +328,10 @@ class ObjectAttributeAccessor
     }
 
     /**
-     * Raises a MissingAttributeError error.
+     * Raises a Missing_Attribute_Error error.
      *
      * @param object $object The object from which the path is followed to read the value.
-     * @param AttributePath The path that is missing from the $object.
+     * @param Attribute_Path The path that is missing from the $object.
      */
     protected function raise_missing_attribute_path_error($missing_path, $full_path)
     {
@@ -339,15 +339,15 @@ class ObjectAttributeAccessor
     }
 
     /**
-     * Raises a MissingAttributeError error.
+     * Raises a Missing_Attribute_Error error.
      *
      * @param object $object The object from which the path is followed to read the value.
-     * @param AttributePath $full_path The complete AttributePath that was intended to be accessed.
-     * @param AttributePath The path that is missing from the $object.
+     * @param Attribute_Path $full_path The complete Attribute_Path that was intended to be accessed.
+     * @param Attribute_Path The path that is missing from the $object.
      */
     protected function new_missing_attribute_path_error($object, $full_path, $missing_path)
     {
-        return new MissingAttributeError(
+        return new Missing_Attribute_Error(
                 "The nested attribute \"" . $missing_path->to_string() . "\" was not found.",
                 $object,
                 $full_path,
