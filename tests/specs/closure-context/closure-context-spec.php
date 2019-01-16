@@ -2,15 +2,15 @@
 
 namespace Closure_Context_Spec;
 
-use Haijin\Tools\ClosureContext;
+use Haijin\Closure_Context;
 
-$spec->describe( "When evaluating a ClosureContext", function() {
+$spec->describe( "When evaluating a Closure_Context", function() {
 
     $this->it( "evaluates the closure", function() {
 
-        $object = new ClosureContextEvaluation();
+        $object = new Closure_ContextEvaluation();
 
-        $closure_context = new ClosureContext( $object, function() {
+        $closure_context = new Closure_Context( $object, function() {
             return $this->get_number();
         });
 
@@ -20,9 +20,9 @@ $spec->describe( "When evaluating a ClosureContext", function() {
 
     $this->it( "evaluates the closure with parameters", function() {
 
-        $object = new ClosureContextEvaluation();
+        $object = new Closure_ContextEvaluation();
 
-        $closure_context = new ClosureContext( $object, function($a, $b) {
+        $closure_context = new Closure_Context( $object, function($a, $b) {
             return $this->sum( $a, $b );
         });
 
@@ -32,7 +32,7 @@ $spec->describe( "When evaluating a ClosureContext", function() {
 
 });
 
-class ClosureContextEvaluation
+class Closure_ContextEvaluation
 {
     public function get_number()
     {

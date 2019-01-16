@@ -1,6 +1,6 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
 /**
  * An alternative to using PHP arrays for associative collections.
@@ -185,7 +185,7 @@ class Dictionary implements \ArrayAccess
                 $binding = $this;
             }
 
-            if( is_callable( $absent_closure ) ) {
+            if( $absent_closure instanceof \Closure ) {
                 return $absent_closure->call( $binding, $this, $key );
             } else {
                 return $absent_closure;
@@ -280,7 +280,7 @@ class Dictionary implements \ArrayAccess
                 $binding = $this;
             }
 
-            if( is_callable( $absent_closure ) ) {
+            if( $absent_closure instanceof \Closure ) {
                 return $absent_closure->call( $binding, $this, $key );
             } else {
                 return $absent_closure;
@@ -431,11 +431,11 @@ class Dictionary implements \ArrayAccess
     /// Errors
 
     /**
-     * Raises a MissingKeyError.
+     * Raises a Missing_Key_Error.
      */
     protected function raise_missing_key_error($key)
     {
-        throw new MissingKeyError( "The key '{$key}' is not defined.", $this, $key );
+        throw new Missing_Key_Error( "The key '{$key}' is not defined.", $this, $key );
     }
 
     /// ArrayAccess implementation

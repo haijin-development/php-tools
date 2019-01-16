@@ -1,15 +1,12 @@
 <?php
 
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
-/**
- * Tests the $path->append( $path ) behaviour.
- */
-$spec->describe( "When appending attributes to an AttributePath", function() {
+$spec->describe( "When appending attributes to an Attribute_Path", function() {
 
     $this->it( "concatenates a string", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( 'address.street' );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( 'address.street' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -17,7 +14,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyString", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( '' );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( '' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -25,7 +22,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnArray", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( [ 'address', 'street' ] );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( [ 'address', 'street' ] );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -34,7 +31,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyArray", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( [] );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( [] );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -42,7 +39,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnAttributePath", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( new AttributePath( 'address.street' ) );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( new Attribute_Path( 'address.street' ) );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -50,7 +47,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyPath", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->append( new AttributePath() );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->append( new Attribute_Path() );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -58,7 +55,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testModifiesTheReceiverInstance", function() {
 
-        $attribute_path = new AttributePath( 'user' );
+        $attribute_path = new Attribute_Path( 'user' );
         $attribute_path->append( 'address.street' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
@@ -67,7 +64,7 @@ $spec->describe( "When appending attributes to an AttributePath", function() {
 
     $this->it( "testReturnsThisInstance", function() {
 
-        $attribute_path = new AttributePath( 'user' );
+        $attribute_path = new Attribute_Path( 'user' );
         $concatenated_path = $attribute_path->append( 'address.street' );
 
         $this->expect( $concatenated_path ) ->to() ->be( "===" ) ->than( $attribute_path );

@@ -1,12 +1,12 @@
 <?php
 
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
-$spec->describe( "When dropping from a FilePath", function() {
+$spec->describe( "When dropping from a File_Path", function() {
 
     $this->it( "drops the last folder", function() {
 
-        $file_path = ( new FilePath( 'home/dev/src' ) )->drop();
+        $file_path = ( new File_Path( 'home/dev/src' ) )->drop();
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev' );
 
@@ -14,16 +14,16 @@ $spec->describe( "When dropping from a FilePath", function() {
 
     $this->it( "drops the n last folders", function() {
 
-        $file_path = ( new FilePath( 'home/dev/src' ) )->drop( 0 );
+        $file_path = ( new File_Path( 'home/dev/src' ) )->drop( 0 );
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
 
-        $file_path = ( new FilePath( 'home/dev/src' ) )->drop( 2 );
+        $file_path = ( new File_Path( 'home/dev/src' ) )->drop( 2 );
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home' );
 
-        $file_path = ( new FilePath( 'home/dev/src' ) )->drop( 3 );
+        $file_path = ( new File_Path( 'home/dev/src' ) )->drop( 3 );
         $this->expect( $file_path->to_string() ) ->to() ->equal( '' );
 
-        $file_path = ( new FilePath( 'home/dev/src' ) )->drop( 4 );
+        $file_path = ( new File_Path( 'home/dev/src' ) )->drop( 4 );
         $this->expect( $file_path->to_string() ) ->to() ->equal( '' );
 
     });
@@ -32,14 +32,14 @@ $spec->describe( "When dropping from a FilePath", function() {
 
         $this->expect( function() {
 
-            ( new FilePath( 'home/dev/src' ) )->drop( -1 );
+            ( new File_Path( 'home/dev/src' ) )->drop( -1 );
 
         }) ->to() ->raise(
-            'Haijin\Tools\PathError',
+            'Haijin\Path_Error',
             function($error) {
 
                 $this->expect( $error->getMessage() ) ->to()
-                    ->equal( "Haijin\Tools\FilePath->drop( -1 ): invalid parameter -1." );
+                    ->equal( "Haijin\File_Path->drop( -1 ): invalid parameter -1." );
 
         });
 
@@ -47,7 +47,7 @@ $spec->describe( "When dropping from a FilePath", function() {
 
     $this->it( "modifies the receiver instance", function() {
 
-        $file_path = new FilePath( 'home/dev/src' );
+        $file_path = new File_Path( 'home/dev/src' );
         $file_path->drop();
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev' );
@@ -56,7 +56,7 @@ $spec->describe( "When dropping from a FilePath", function() {
 
     $this->it( "returns this instance", function() {
 
-        $file_path = new FilePath( 'home/dev/src' );
+        $file_path = new File_Path( 'home/dev/src' );
         $dropped_path = $file_path->drop();
 
         $this->expect( $dropped_path ) ->to() ->be( "===" ) ->than( $file_path );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
 /**
  * Models a file path.
@@ -9,86 +9,86 @@ namespace Haijin\Tools;
  *
  *      /// Creating paths
  *
- *      use Haijin\Tools\FilePath;
+ *      use Haijin\File_Path;
  *
  *      // Creates an empty path.
- *      $path = new FilePath();
+ *      $path = new File_Path();
  *
  *      // Creates a path from an attributes chain string.
- *      $path = new FilePath( 'home/dev/src' );
+ *      $path = new File_Path( 'home/dev/src' );
  *      print( $path . "\n" );
  *
  *      // Creates a path from an attributes chain array.
- *      $path = new FilePath( ['home', 'dev', 'src'] );
+ *      $path = new File_Path( ['home', 'dev', 'src'] );
  *      print( $path . "\n" );
  *
  *      // Creates a path from another path.
- *      $path = new FilePath( new FilePath( 'home/dev/src' ) );
+ *      $path = new File_Path( new File_Path( 'home/dev/src' ) );
  *      print( $path . "\n" );
  *
  *      /// Concatenating paths
  *
  *      // Concatenates two paths into a new one.
- *      $path = new FilePath( 'home' );
- *      $new_path = $path->concat( new FilePath( 'dev/src' ) );
+ *      $path = new File_Path( 'home' );
+ *      $new_path = $path->concat( new File_Path( 'dev/src' ) );
  *      print( $new_path . "\n" );
  *
- *      // Concatenates a string into a new FilePath.
- *      $path = new FilePath( 'home' );
+ *      // Concatenates a string into a new File_Path.
+ *      $path = new File_Path( 'home' );
  *      $new_path = $path->concat( 'dev/src' );
  *      print( $new_path . "\n" );
  *
- *      // Concatenates an array of attributes into a new FilePath.
- *      $path = new FilePath( 'home' );
+ *      // Concatenates an array of attributes into a new File_Path.
+ *      $path = new File_Path( 'home' );
  *      $new_path = $path->concat( ['dev/src'] );
  *      print( $new_path . "\n" );
  *
  *      /// Moving the path back
  *
  *      // Removes the last attribute from the path into a new path.
- *      $path = new FilePath( 'home/dev/src' );
+ *      $path = new File_Path( 'home/dev/src' );
  *      $new_path = $path->back();
  *      print( $new_path . "\n" );
  *      
  *      // Removes the last n attributes from the path into a new path.
- *      $path = new FilePath( 'home/dev/src' );
+ *      $path = new File_Path( 'home/dev/src' );
  *      $new_path = $path->back( 2 );
  *      print( $new_path . "\n" );
  *
  *      /// Appending paths
  *
  *      // Appends another Path to a path.
- *      $path = new FilePath( 'home' );
- *      $path->append( new FilePath( 'dev/src' ) );
+ *      $path = new File_Path( 'home' );
+ *      $path->append( new File_Path( 'dev/src' ) );
  *      print( $path . "\n" );
  *
  *      // Appends an attributes string to a path.
- *      $path = new FilePath( 'home' );
+ *      $path = new File_Path( 'home' );
  *      $path->append( 'dev/src' );
  *      print( $path . "\n" );
  *
  *      // Appends an attributes array to a path.
- *      $path = new FilePath( 'home' );
+ *      $path = new File_Path( 'home' );
  *      $path->append( ['dev/src'] );
  *      print( $path . "\n" );
  *
  *      /// Dropping path tails
  *
  *      // Drops the last attribute from the path.
- *      $path = new FilePath( 'home/dev/src' );
+ *      $path = new File_Path( 'home/dev/src' );
  *      $path->drop();
  *      print( $path . "\n" );
  *
  *      // Drops the last n attributes from the path.
- *      $path = new FilePath( 'home/dev/src' );
+ *      $path = new File_Path( 'home/dev/src' );
  *      $path->drop( 2 );
  *      print( $path . "\n" );
  *
  */
-class FilePath extends Path
+class File_Path extends Path
 {
     /**
-     * Flags if $this FilePath is absolute or relative.
+     * Flags if $this File_Path is absolute or relative.
      */
     protected $is_absolute;
 
@@ -165,11 +165,11 @@ class FilePath extends Path
     /**
      * Concatenates attributes to the path.
      *
-     * Returns a new AttributePath with the appended path.
+     * Returns a new Attribute_Path with the appended path.
      *
      * @param string|array|Path $attributes_chain The attributes to concatenate to $this object.
      *
-     * @return FilePath A new Path object with the $attributes_chain concatenated.
+     * @return File_Path A new Path object with the $attributes_chain concatenated.
      */
     public function concat($attributes_chain)
     {
@@ -188,7 +188,7 @@ class FilePath extends Path
      *
      * @param integer $n Optional - An integer >= 0 to move back in the attributes chain.
      *
-     * @return FilePath A new Path with the last attributes removed.
+     * @return File_Path A new Path with the last attributes removed.
      */
     public function back($n = 1)
     {
@@ -248,9 +248,9 @@ class FilePath extends Path
     /// Asking
 
     /**
-     * Returns true if $this FilePath is absolute, false if its relative.
+     * Returns true if $this File_Path is absolute, false if its relative.
      *
-     * @return bool Returns true if $this FilePath is absolute, false if its relative.
+     * @return bool Returns true if $this File_Path is absolute, false if its relative.
      */
     public function is_absolute()
     {
@@ -258,9 +258,9 @@ class FilePath extends Path
     }
 
     /**
-     * Returns false if $this FilePath is relative, false if its absolute.
+     * Returns false if $this File_Path is relative, false if its absolute.
      *
-     * @return bool Returns false if $this FilePath is relative, false if its absolute.
+     * @return bool Returns false if $this File_Path is relative, false if its absolute.
      */
     public function is_relative()
     {
@@ -302,9 +302,9 @@ class FilePath extends Path
     }
 
     /**
-     * Reads and returns the contents of the file at $this FilePath.
+     * Reads and returns the contents of the file at $this File_Path.
      *
-     * @return string  The contents of the file at $this FilePath.
+     * @return string  The contents of the file at $this File_Path.
      */
     public function file_contents()
     {
@@ -312,9 +312,9 @@ class FilePath extends Path
     }
 
     /**
-     * Writes the contents to the file at $this FilePath.
+     * Writes the contents to the file at $this File_Path.
      *
-     * @param string  The contents to write to the file at $this FilePath.
+     * @param string  The contents to write to the file at $this File_Path.
      */
     public function write_contents($contents)
     {

@@ -1,14 +1,14 @@
 <?php
 
-use Haijin\Tools\OrderedCollection;
+use Haijin\Ordered_Collection;
 
-$spec->describe( "An OrderedCollection", function() {
+$spec->describe( "An Ordered_Collection", function() {
 
     $this->describe( "when creating instances", function() {
 
         $this->it( "creates an instance with an item", function() {
 
-            $collection = OrderedCollection::with( 1 );
+            $collection = Ordered_Collection::with( 1 );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1 ] );
 
@@ -16,7 +16,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "creates an instance with many items", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2 ] );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
 
@@ -24,7 +24,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "creates an instance from another instance", function() {
 
-            $collection = OrderedCollection::with_all( OrderedCollection::with_all( [ 1, 2 ] ) );
+            $collection = Ordered_Collection::with_all( Ordered_Collection::with_all( [ 1, 2 ] ) );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
 
@@ -37,11 +37,11 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns if empty or not", function() {
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
 
             $this->expect( $collection->is_empty() ) ->to() ->be() ->true();
 
-            $collection = OrderedCollection::with( 1 );
+            $collection = Ordered_Collection::with( 1 );
 
             $this->expect( $collection->is_empty() ) ->to() ->be() ->false();
 
@@ -49,11 +49,11 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns if not empty or empty", function() {
 
-            $collection = OrderedCollection::with( 1 );
+            $collection = Ordered_Collection::with( 1 );
 
             $this->expect( $collection->not_empty() )  ->to() ->be() ->true();
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
 
             $this->expect( $collection->not_empty() ) ->to() ->be() ->false();
 
@@ -65,12 +65,12 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "adds an item at the end of the collection", function() {
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
             $collection->add( 1 );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1 ] );
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
             $collection[] = 1;
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1 ] );
@@ -79,15 +79,15 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "adds many items at the end of the collection", function() {
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
             $collection->add_all( [ 1, 2 ] );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
 
-            $another_collection = new OrderedCollection();
+            $another_collection = new Ordered_Collection();
             $another_collection->add_all( [ 1, 2] );
 
-            $collection = new OrderedCollection();
+            $collection = new Ordered_Collection();
             $collection->add_all( $another_collection );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
@@ -96,7 +96,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "adds an item at an index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $collection->add_at( 'a', 1 );
 
@@ -110,7 +110,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns the item at an index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->expect( $collection->at( 0 ) ) ->to() ->equal( 1 );
             $this->expect( $collection->at( 1 ) ) ->to() ->equal( 2 );
@@ -124,7 +124,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns the item at a negative index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->expect( $collection->at( -1 ) ) ->to() ->equal( 3 );
             $this->expect( $collection->at( -2 ) ) ->to() ->equal( 2 );
@@ -137,16 +137,16 @@ $spec->describe( "An OrderedCollection", function() {
 
         });
 
-        $this->it( "raises an OutOfRangeError if the index is invalid", function() {
+        $this->it( "raises an Out_Of_Range_Error if the index is invalid", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->expect( function() use($collection) {
 
                 $collection->at( 3 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -164,7 +164,7 @@ $spec->describe( "An OrderedCollection", function() {
                 $collection[ 3 ];
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -183,7 +183,7 @@ $spec->describe( "An OrderedCollection", function() {
                 $collection->at( -4 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -202,7 +202,7 @@ $spec->describe( "An OrderedCollection", function() {
                     $collection[ -4 ];
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -219,7 +219,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns the item at an index or evaluates a closure if the index is invalid", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->at_if_absent( 2, function() { return 'not found'; });
             $this->expect( $item ) ->to() ->equal( 3 );
@@ -234,7 +234,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns the item at an index or evaluates a closure if the negative index is invalid", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->at_if_absent( -1, function() { return 'not found'; });
             $this->expect( $item ) ->to() ->equal( 3 );
@@ -250,12 +250,12 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "puts an item at an index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->at_put( 1, 'a' );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 'a', 3 ] );
 
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection[ 1 ] = 'a';
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 'a', 3 ] );
 
@@ -263,12 +263,12 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "puts an item at a negative index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->at_put( -1, 'a' );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2, 'a' ] );
 
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection[ -1 ] = 'a';
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2, 'a' ] );
 
@@ -276,27 +276,27 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "appends an item if the put_at index is the size of the collection", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->at_put( 3, 'a' );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2, 3, 'a' ] );
 
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection[ 3 ] = 'a';
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2, 3, 'a' ] );
 
         });
 
-        $this->it( "raises an OutOfRangeError if the index is invalid", function() {
+        $this->it( "raises an Out_Of_Range_Error if the index is invalid", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->expect( function() use($collection) {
 
                     $collection->at_put( 4, 'a' );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -315,7 +315,7 @@ $spec->describe( "An OrderedCollection", function() {
                     $collection[ 4 ] = 'a';
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -334,7 +334,7 @@ $spec->describe( "An OrderedCollection", function() {
                     $collection->at_put( -4, 'a' );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -353,7 +353,7 @@ $spec->describe( "An OrderedCollection", function() {
                     $collection[ -4 ] = 'a';
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -375,7 +375,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "removes the last item in the collection", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->remove_last();
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
@@ -384,27 +384,27 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "removes the item at a valid index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $item = $collection->remove_at( 0 );
 
             $this->expect( $item ) ->to() ->equal( 1 );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 2, 3 ] );
 
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $item = $collection->remove_at( 1 );
 
             $this->expect( $item ) ->to() ->equal( 2 );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 3 ] );
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $item = $collection->remove_at( 2 );
 
             $this->expect( $item ) ->to() ->equal( 3 );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
 
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             unset( $collection[ 0 ] );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 2, 3 ] );
 
@@ -412,33 +412,33 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "removes the item at a valid negative index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->remove_at( -1 );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2 ] );
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->remove_at( -2 );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 3 ] );
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
             $collection->remove_at( -3 );
 
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 2, 3 ] );
 
         });
 
-        $this->it( "raises an OutOfRangeError if the index to remove is invalid", function() {
+        $this->it( "raises an Out_Of_Range_Error if the index to remove is invalid", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->expect( function() use($collection){
 
                     $collection->remove_at( 3 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -457,7 +457,7 @@ $spec->describe( "An OrderedCollection", function() {
                     $collection->remove_at( -4 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\OutOfRangeError',
+                'Haijin\Out_Of_Range_Error',
                 function($error) use($collection) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -474,7 +474,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "removes the item at a valid index or evaluates the closure at an invalid index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->remove_at_if_absent( 0, function() {
                 return "absent index";
@@ -487,7 +487,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "removes the item at a valid index or evaluates the closure at an invalid index", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->remove_at_if_absent( 3, function() {
                 return "absent index";
@@ -509,7 +509,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "finds the first matching item", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->find_first( function($each) {
                 return $each % 2 == 1;
@@ -521,7 +521,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "finds the index of the first matching item", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->find_first_index( function($each) {
                 return $each % 2 == 1;
@@ -533,7 +533,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "finds the last matching item", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->find_last( function($each) {
                 return $each % 2 == 1;
@@ -545,7 +545,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "finds the index of the last matching item", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $item = $collection->find_last_index( function($each) {
                 return $each % 2 == 1;
@@ -561,7 +561,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "iterates over all the items in the collection", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->items = [];
 
@@ -575,7 +575,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "iterates over all the indices and items in the collection", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->items = [];
             $this->indices = [];
@@ -592,7 +592,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "iterates all the items in the collection backwards", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $this->items = [];
 
@@ -604,9 +604,9 @@ $spec->describe( "An OrderedCollection", function() {
 
         });
 
-        $this->it( "returns a new OrderedCollection with only the items that matches a filter", function() {
+        $this->it( "returns a new Ordered_Collection with only the items that matches a filter", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $selected_values = $collection->select( function($each) {
                     return $each % 2 == 1;
@@ -616,9 +616,9 @@ $spec->describe( "An OrderedCollection", function() {
 
         });
 
-        $this->it( "returns a new OrderedCollection applying a closure to each item in the collection", function() {
+        $this->it( "returns a new Ordered_Collection applying a closure to each item in the collection", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $collected_values = $collection->collect( function($each) {
                     return $each * 2;
@@ -630,7 +630,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "accumulates a value into a variable", function() {
 
-            $collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
 
             $sum = $collection->acummulate( 10, function($sum, $each) {
                     return $sum = $sum + $each;
@@ -646,7 +646,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns true if includes an item using == as comparison", function() {
 
-            $collection = OrderedCollection::with_all( [ "a", "b", "c" ] );
+            $collection = Ordered_Collection::with_all( [ "a", "b", "c" ] );
 
             $this->expect( $collection->includes( "a" ) ) ->to() ->be() ->true();
             $this->expect( $collection->includes( "d" ) ) ->to() ->be() ->false();
@@ -655,7 +655,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "returns true if does not include an item using == as comparison", function() {
 
-            $collection = OrderedCollection::with_all( [ "a", "b", "c" ] );
+            $collection = Ordered_Collection::with_all( [ "a", "b", "c" ] );
 
             $this->expect( $collection->includes_not( "d" ) ) ->be() ->true();
             $this->expect( $collection->includes_not( "a" ) ) ->be() ->false();
@@ -668,7 +668,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "joins the string items of a collection with a given separator string", function() {
 
-            $collection = OrderedCollection::with_all( [ "a", "b", "c" ] );
+            $collection = Ordered_Collection::with_all( [ "a", "b", "c" ] );
 
             $this->expect( $collection->join_with( '.' ) ) ->to() ->equal( "a.b.c" );
 
@@ -680,7 +680,7 @@ $spec->describe( "An OrderedCollection", function() {
 
         $this->it( "creates a copy of the collection", function() {
 
-            $collection_1 = OrderedCollection::with( 1 );
+            $collection_1 = Ordered_Collection::with( 1 );
 
             $collection_2 = clone $collection_1;
 

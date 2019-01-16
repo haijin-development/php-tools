@@ -1,12 +1,12 @@
 <?php
 
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
-$spec->describe( "When concatenating to an AttributePath", function() {
+$spec->describe( "When concatenating to an Attribute_Path", function() {
 
     $this->it( "concatenates a string", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( 'address.street' );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( 'address.street' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -14,7 +14,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyString", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( '' );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( '' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -22,7 +22,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnArray", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( [ 'address', 'street' ] );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( [ 'address', 'street' ] );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -31,7 +31,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyArray", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( [] );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( [] );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -39,7 +39,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnAttributePath", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( new AttributePath( 'address.street' ) );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( new Attribute_Path( 'address.street' ) );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.address.street' );
 
@@ -47,7 +47,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testConcatenatesAnEmptyPath", function() {
 
-        $attribute_path = ( new AttributePath( 'user' ) )->concat( new AttributePath() );
+        $attribute_path = ( new Attribute_Path( 'user' ) )->concat( new Attribute_Path() );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );
 
@@ -55,7 +55,7 @@ $spec->describe( "When concatenating to an AttributePath", function() {
 
     $this->it( "testDoesNotModifyTheReceiverInstance", function() {
 
-        $attribute_path = new AttributePath( 'user' );
+        $attribute_path = new Attribute_Path( 'user' );
         $concatenated_path = $attribute_path->concat( 'address.street' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user' );

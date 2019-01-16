@@ -1,10 +1,10 @@
 # Path classes
 
-A set of classes to model paths of things. Currently there is just an `AttributePath` class.
+A set of classes to model paths of things. Currently there is just an `Attribute_Path` class.
 
 ## Table of contents
 
-1. [AttributePath](#c-1)
+1. [Attribute_Path](#c-1)
 2. [Examples](#c-2)
     1. [Creating paths](#c-2-1)
     2. [Concatenating paths](#c-2-2)
@@ -12,19 +12,19 @@ A set of classes to model paths of things. Currently there is just an `Attribute
     4. [Appending paths](#c-2-4)
     5. [Dropping path tails](#c-2-5)
     6. [Accessing a nested attribute value](#c-2-6)
-3. [FilePath](#c-3)
+3. [File_Path](#c-3)
     1. [Creating paths](#c-3-1)
     2. [Concatenating paths](#c-3-2)
     3. [Moving the path back](#c-3-3)
     4. [Appending paths](#c-3-4)
     5. [Dropping path tails](#c-3-5)
     6. [Absolute paths](#c-3-6)
-    7. [FilePath file operations](#c-3-7)
+    7. [File_Path file operations](#c-3-7)
 
 
 
 <a name="c-1"></a>
-## AttributePath
+## Attribute_Path
 
 An attribute path is a sequence of attributes from a root object to a nested attribute of that object.
 
@@ -57,37 +57,37 @@ This class provides a common interface and a simple way to deal with attribute p
 ### Creating paths
 
 ```php
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
 // Creates an empty path.
-$path = new AttributePath();
+$path = new Attribute_Path();
 
 // Creates a path from an attributes chain string.
-$path = new AttributePath( 'user.address.street' );
+$path = new Attribute_Path( 'user.address.street' );
 
 // Creates a path from an attributes chain array.
-$path = new AttributePath( ['user', 'address', 'street'] );
+$path = new Attribute_Path( ['user', 'address', 'street'] );
 
 // Creates a path from another path.
-$path = new AttributePath( new AttributePath( 'user.address.street' ) );
+$path = new Attribute_Path( new Attribute_Path( 'user.address.street' ) );
 ```
 
 <a name="c-2-2"></a>
 ### Concatenating paths
 
 ```php
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
 // Concatenates two paths into a new one.
-$path = new AttributePath( 'user' );
-$new_path = $path->concat( new AttributePath( 'address.street' ) );
+$path = new Attribute_Path( 'user' );
+$new_path = $path->concat( new Attribute_Path( 'address.street' ) );
 
-// Concatenates a string into a new AttributePath.
-$path = new AttributePath( 'user' );
+// Concatenates a string into a new Attribute_Path.
+$path = new Attribute_Path( 'user' );
 $new_path = $path->concat( 'address.street' );
 
-// Concatenates an array of attributes into a new AttributePath.
-$path = new AttributePath( 'user' );
+// Concatenates an array of attributes into a new Attribute_Path.
+$path = new Attribute_Path( 'user' );
 $new_path = $path->concat( ['address.street'] );
 ```
 
@@ -95,14 +95,14 @@ $new_path = $path->concat( ['address.street'] );
 ### Moving the path back
 
 ```php
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
 // Removes the last attribute from the path into a new path.
-$path = new AttributePath( 'user.address.street' );
+$path = new Attribute_Path( 'user.address.street' );
 $new_path = $path->back();
 
 // Removes the last n attributes from the path into a new path.
-$path = new AttributePath( 'user.address.street' );
+$path = new Attribute_Path( 'user.address.street' );
 $new_path = $path->back( 2 );
 ```
 
@@ -110,18 +110,18 @@ $new_path = $path->back( 2 );
 ### Appending paths
 
 ```php
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
 // Appends another Path to a path.
-$path = new AttributePath( 'user' );
-$path->append( new AttributePath( 'address.street' ) );
+$path = new Attribute_Path( 'user' );
+$path->append( new Attribute_Path( 'address.street' ) );
 
 // Appends an attributes string to a path.
-$path = new AttributePath( 'user' );
+$path = new Attribute_Path( 'user' );
 $path->append( 'address.street' );
 
 // Appends an attributes array to a path.
-$path = new AttributePath( 'user' );
+$path = new Attribute_Path( 'user' );
 $path->append( ['address.street'] );
 ```
 
@@ -129,14 +129,14 @@ $path->append( ['address.street'] );
 ### Dropping path tails
 
 ```php
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
 // Drops the last attribute from the path.
-$path = new AttributePath( 'user.address.street' );
+$path = new Attribute_Path( 'user.address.street' );
 $path->drop();
 
 // Drops the last n attributes from the path.
-$path = new AttributePath( 'user.address.street' );
+$path = new Attribute_Path( 'user.address.street' );
 $path->drop( 2 );
 ```
 
@@ -152,7 +152,7 @@ $user = [
         'street' => 'Evergreen 742'
     ]
 ];
-$path = new AttributePath( 'address.street' );
+$path = new Attribute_Path( 'address.street' );
 $value = $path->get_value_from( $user );
 
 // Writes an attribute to an associative array
@@ -163,24 +163,24 @@ $user = [
         'street' => 'Evergreen 742'
     ]
 ];
-$path = new AttributePath( 'address.street' );
+$path = new Attribute_Path( 'address.street' );
 $value = $path->set_value_to( $user, 123 );
 
 // Reads an attribute from an indexed array
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$path = new AttributePath( '[1].[0]' );
+$path = new Attribute_Path( '[1].[0]' );
 $value = $path->get_value_from( $user );
 
 // Writes an attribute to an indexed array
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$path = new AttributePath( '[1].[0]' );
+$path = new Attribute_Path( '[1].[0]' );
 $value = $path->set_value_to( $user, 123 );
 ```
 
 <a name="c-3"></a>
-## FilePath
+## File_Path
 
 A path to a file or folder.
 
@@ -193,37 +193,37 @@ A path to a file or folder.
 ### Creating paths
 
 ```php
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
 // Creates an empty path.
-$path = new FilePath();
+$path = new File_Path();
 
 // Creates a path from an attributes chain string.
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 
 // Creates a path from an attributes chain array.
-$path = new FilePath( ['user', 'address', 'street'] );
+$path = new File_Path( ['user', 'address', 'street'] );
 
 // Creates a path from another path.
-$path = new FilePath( new FilePath( 'user/address/street' ) );
+$path = new File_Path( new File_Path( 'user/address/street' ) );
 ```
 
 <a name="c-2-2"></a>
 ### Concatenating paths
 
 ```php
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
 // Concatenates two paths into a new one.
-$path = new FilePath( 'user' );
-$new_path = $path->concat( new FilePath( 'address/street' ) );
+$path = new File_Path( 'user' );
+$new_path = $path->concat( new File_Path( 'address/street' ) );
 
-// Concatenates a string into a new FilePath.
-$path = new FilePath( 'user' );
+// Concatenates a string into a new File_Path.
+$path = new File_Path( 'user' );
 $new_path = $path->concat( 'address/street' );
 
-// Concatenates an array of attributes into a new FilePath.
-$path = new FilePath( 'user' );
+// Concatenates an array of attributes into a new File_Path.
+$path = new File_Path( 'user' );
 $new_path = $path->concat( ['address/street'] );
 ```
 
@@ -231,14 +231,14 @@ $new_path = $path->concat( ['address/street'] );
 ### Moving the path back
 
 ```php
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
 // Removes the last attribute from the path into a new path.
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 $new_path = $path->back();
 
 // Removes the last n attributes from the path into a new path.
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 $new_path = $path->back( 2 );
 ```
 
@@ -246,18 +246,18 @@ $new_path = $path->back( 2 );
 ### Appending paths
 
 ```php
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
 // Appends another Path to a path.
-$path = new FilePath( 'user' );
-$path->append( new FilePath( 'address/street' ) );
+$path = new File_Path( 'user' );
+$path->append( new File_Path( 'address/street' ) );
 
 // Appends a path string to a path.
-$path = new FilePath( 'user' );
+$path = new File_Path( 'user' );
 $path->append( 'address/street' );
 
 // Appends a path array to a path.
-$path = new FilePath( 'user' );
+$path = new File_Path( 'user' );
 $path->append( ['address/street'] );
 ```
 
@@ -265,14 +265,14 @@ $path->append( ['address/street'] );
 ### Dropping path tails
 
 ```php
-use Haijin\Tools\FilePath;
+use Haijin\File_Path;
 
 // Drops the last part from the path.
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 $path->drop();
 
 // Drops the last n parts from the path.
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 $path->drop( 2 );
 ```
 
@@ -282,7 +282,7 @@ $path->drop( 2 );
 Creates an absolute path.
 
 ```php
-$path = new FilePath( '/user/address/street' );
+$path = new File_Path( '/user/address/street' );
 
 $path->is_absolute();
 $path->is_relative();
@@ -291,7 +291,7 @@ $path->is_relative();
 Makes a path absolute or relative
 
 ```php
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 
 $path->be_absolute();
 $path->be_absolute( false );
@@ -301,12 +301,12 @@ $path->be_relative( false );
 ```
 
 <a name="c-2-7"></a>
-### FilePath file operations
+### File_Path file operations
 
 Read the contents of the file at the path with
 
 ```php
-$path = new FilePath( 'user/address/street' );
+$path = new File_Path( 'user/address/street' );
 
 $path->file_contents();
 ```

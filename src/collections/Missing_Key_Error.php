@@ -1,8 +1,8 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
-class MissingKeyError extends \Exception
+class Missing_Key_Error extends \Exception
 {
     public function __construct($message, $dictionary, $key)
     {

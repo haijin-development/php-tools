@@ -1,4 +1,4 @@
-# OrderedCollection
+# Ordered_Collection
 
 An alternative to using PHP arrays for indexed collections.
 
@@ -26,15 +26,15 @@ It is always passed by reference and has a consistent, simple and complete proto
 ### Creating instances
 ```php
 /**
- * Creates and returns a new OrderedCollection with an item in it.
+ * Creates and returns a new Ordered_Collection with an item in it.
  *
  * Example
  *
- *      $ordered_collection = OrderedCollection::with( 123 );
+ *      $ordered_collection = Ordered_Collection::with( 123 );
  *
  * @param object $item An item to add to the created collection.
  *
- * @return OrderedCollection The OrderedCollection with the item in it.
+ * @return Ordered_Collection The Ordered_Collection with the item in it.
  */
 public function with($item);
 ```
@@ -42,15 +42,15 @@ public function with($item);
 
 ```php
 /**
- * Creates and returns a new OrderedCollection with all the items in it.
+ * Creates and returns a new Ordered_Collection with all the items in it.
  *
  * Example
  *
- *      $ordered_collection = OrderedCollection::with_all( [ 1, 2, 3 ] );
+ *      $ordered_collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
  *
- * @param array|OrderedCollection $items The items to add to the created collection.
+ * @param array|Ordered_Collection $items The items to add to the created collection.
  *
- * @return OrderedCollection The OrderedCollection with the items in it.
+ * @return Ordered_Collection The Ordered_Collection with the items in it.
  */
 public function with_all($items);
 ```
@@ -63,7 +63,7 @@ public function with_all($items);
 /**
  * Initializes $this object with an optional array of items in it.
  *
- * @param array|OrderedCollection $items Optional - An array or OrderedCollection with items to add to $this OrderedCollection.
+ * @param array|Ordered_Collection $items Optional - An array or Ordered_Collection with items to add to $this Ordered_Collection.
  */
 public function __construct($items = []);
 ```
@@ -111,7 +111,7 @@ public function not_empty();
  *
  * @param object $item The item to append to the collection.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function add($item);
 ```
@@ -125,9 +125,9 @@ public function add($item);
  *
  *      $ordered_collection->add_all( [ 1, 2, 3 ] );
  *
- * @param array|OrderedCollection $items The items to append to the collection.
+ * @param array|Ordered_Collection $items The items to append to the collection.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function add_all($items);
 ```
@@ -145,7 +145,7 @@ public function add_all($items);
  * @param object $item The item to add.
  * @param int $index The position to add the item.
  *
- * @return OrderedCollection Returns $this object.
+ * @return Ordered_Collection Returns $this object.
  */
 public function add_at($item, $index);
 ```
@@ -163,7 +163,7 @@ public function add_at($item, $index);
  * @param array $items The items to add.
  * @param int $index The position to add the items.
  *
- * @return OrderedCollection Returns $this object.
+ * @return Ordered_Collection Returns $this object.
  */
 public function add_all_at($items, $index);
 ```
@@ -235,7 +235,7 @@ public function at_if_absent($index, $absent_closure, $binding = null);
  * @param int $index The position to put the element.
  * @param object $item The item to put in the given $index position.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function at_put($index, $item);
 ```
@@ -260,7 +260,7 @@ public function remove_last();
 ```php
 /**
  * Removes the item at an indexed position.
- * If the index is out of range raises an OutOfRangeError.
+ * If the index is out of range raises an Out_Of_Range_Error.
  *
  *  Example
  *
@@ -448,7 +448,7 @@ public function find_last_index($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function each_do($closure, $binding = null);
 ```
@@ -469,7 +469,7 @@ public function each_do($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function each_with_index_do($closure, $binding = null);
 ```
@@ -489,7 +489,7 @@ public function each_with_index_do($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection Returns $this collection.
+ * @return Ordered_Collection Returns $this collection.
  */
 public function reverse_do($closure, $binding = null);
 ```
@@ -497,7 +497,7 @@ public function reverse_do($closure, $binding = null);
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new OrderedCollection with only
+ * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with only
  * those items that makes the closure evaluate to true.
  *
  *  Example
@@ -509,7 +509,7 @@ public function reverse_do($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection and returns true or false.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection A new OrderedCollection with the items that makes the closure evaluate to true.
+ * @return Ordered_Collection A new Ordered_Collection with the items that makes the closure evaluate to true.
  */
 public function select($closure, $binding = null);
 ```
@@ -517,7 +517,7 @@ public function select($closure, $binding = null);
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new OrderedCollection with only
+ * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with only
  * those items that makes the closure evaluate to false.
  *
  *  Example
@@ -529,7 +529,7 @@ public function select($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection and returns true or false.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection A new OrderedCollection with the items that makes the closure evaluate to false.
+ * @return Ordered_Collection A new Ordered_Collection with the items that makes the closure evaluate to false.
  */
 public function reject($closure, $binding = null);
 ```
@@ -537,7 +537,7 @@ public function reject($closure, $binding = null);
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new OrderedCollection with the results
+ * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with the results
  * collected on each evaluation.
  *
  *  Example
@@ -549,7 +549,7 @@ public function reject($closure, $binding = null);
  * @param callable $closure A closure that is evaluated on each item in the collection and returns something.
  * @param object $binding An optional binding for the closure.
  *
- * @return OrderedCollection A new OrderedCollection with the items collected from the closure evaluation on each item.
+ * @return Ordered_Collection A new Ordered_Collection with the items collected from the closure evaluation on each item.
  */
 public function collect($closure, $binding = null);
 ```

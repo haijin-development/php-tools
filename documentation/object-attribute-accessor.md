@@ -1,4 +1,4 @@
-# ObjectAttributeAccessor
+# Object_Attribute_Accessor
 
 A class to dynamically read and write attributes of objects, arrays and associative arrays using a polimprophic interface.
 
@@ -34,7 +34,7 @@ $user = [
     ]
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( 'address.street' );
 ```
 
@@ -42,7 +42,7 @@ $value = $accessor->get_value_at( 'address.street' );
 ### Reads an attribute and if it is missing evaluates a closure
 
 ```php
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at_if_absent( "address.number",  function() { return "Absent value"; });
 ```
 
@@ -50,7 +50,7 @@ $value = $accessor->get_value_at_if_absent( "address.number",  function() { retu
 ### Reads an attribute and if it is missing returns a constant
 
 ```php
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at_if_absent( "address.number",  "Absent value" );
 ```
 
@@ -66,7 +66,7 @@ $user = [
     ]
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $accessor->set_value_at( 'address.street', 123 );
 ```
 
@@ -79,7 +79,7 @@ $user = [
     'last_name' => 'Simpson',
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $accessor->create_value_at( 'address.street', 123 );
 ```
 
@@ -89,7 +89,7 @@ $accessor->create_value_at( 'address.street', 123 );
 ```php
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( '[1].[0]' );
 ```
 
@@ -99,7 +99,7 @@ $value = $accessor->get_value_at( '[1].[0]' );
 ```php
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $accessor->set_value_at( '[1].[0]', 123 );
 ```
 
@@ -112,7 +112,7 @@ $user = [
     'last_name' => 'Simpson',
 ];
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $accessor->create_value_at( 'addresses[0].address.street', 123 );
 ```
 
@@ -126,7 +126,7 @@ $user->last_name = 'Simpson';
 $user->address = new stdclass();
 $user->address->street = 'Evergreen 742';
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->get_value_at( 'address.street' );
 ```
 
@@ -140,6 +140,6 @@ $user->last_name = 'Simpson';
 $user->address = new stdclass();
 $user->address->street = 'Evergreen 742';
 
-$accessor = new ObjectAttributeAccessor( $user );
+$accessor = new Object_Attribute_Accessor( $user );
 $value = $accessor->set_value_at( 'address.street', 123 );
 ```

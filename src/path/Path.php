@@ -1,6 +1,6 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
 /**
  * Models a path of attributes to access nested attributes from a root object.
@@ -102,7 +102,7 @@ abstract class Path
     /**
      * Concatenates attributes to the path.
      *
-     * Returns a new AttributePath with the appended path.
+     * Returns a new Attribute_Path with the appended path.
      *
      * @param string|array|Path $attributes_chain The attributes to concatenate to $this object.
      *
@@ -223,7 +223,7 @@ abstract class Path
     /// Errors
 
     /**
-     * Raises a new PathError with a $message.
+     * Raises a new Path_Error with a $message.
      *
      * The raising an error is a method on its own to allow subclasses to override it if they want to.
      *
@@ -235,18 +235,18 @@ abstract class Path
     }
 
     /**
-     * Creates a new PathError object with a $message.
+     * Creates a new Path_Error object with a $message.
      *
      * The creation of an object is a method on its own to allow subclasses to override it with their
      * own Error class if they want to.
      *
      * @param string $message The error message.
      *
-     * @return PathError A new ErrorPath object.
+     * @return Path_Error A new ErrorPath object.
      */
     protected function new_path_error($message)
     {
-        return new PathError($message);
+        return new Path_Error($message);
     }
 
     /**

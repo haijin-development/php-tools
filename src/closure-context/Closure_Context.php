@@ -1,6 +1,6 @@
 <?php
 
-namespace Haijin\Tools;
+namespace Haijin;
 
 
 /**
@@ -21,21 +21,21 @@ namespace Haijin\Tools;
  *      $object = new SampleClass();
  *
  *
- *      // Create a ClosureContext from a closure and bind it to $object.
+ *      // Create a Closure_Context from a closure and bind it to $object.
  *
- *      $block = new ClosureContext( $object, function($a, $b) {
+ *      $block = new Closure_Context( $object, function($a, $b) {
  *          var_dump( $this );
  *
  *          return $this->sum( $a, $b );
  *      });
  *
- *      // Evaluate the ClosureContext. Within its closure $this will point to $object.
+ *      // Evaluate the Closure_Context. Within its closure $this will point to $object.
  *
  *      $result = $block->evaluate( 3, 4 );
  *
  *      print $result . "\n";
  */
-class ClosureContext
+class Closure_Context
 {
     /**
      * Initializes the instance with binding for '$this' pseudo-variable and a closure.

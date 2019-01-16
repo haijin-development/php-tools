@@ -1,12 +1,12 @@
 <?php
 
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
-$spec->describe( "When creating AttributePath instances", function() {
+$spec->describe( "When creating Attribute_Path instances", function() {
 
     $this->it( "creates an empty path", function() {
 
-        $attribute_path = new AttributePath();
+        $attribute_path = new Attribute_Path();
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( '' );
 
@@ -14,7 +14,7 @@ $spec->describe( "When creating AttributePath instances", function() {
 
     $this->it( "creates a path from an attributes string", function() {
 
-        $attribute_path = new AttributePath( 'user.name.address' );
+        $attribute_path = new Attribute_Path( 'user.name.address' );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.name.address' );
 
@@ -22,7 +22,7 @@ $spec->describe( "When creating AttributePath instances", function() {
 
     $this->it( "creates a path from an attributes array", function() {
 
-        $attribute_path = new AttributePath( ['user', 'name', 'address'] );
+        $attribute_path = new Attribute_Path( ['user', 'name', 'address'] );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.name.address' );
 
@@ -30,7 +30,7 @@ $spec->describe( "When creating AttributePath instances", function() {
 
     $this->it( "creates a path from another path", function() {
 
-        $attribute_path = new AttributePath( new AttributePath( 'user.name.address' ) );
+        $attribute_path = new Attribute_Path( new Attribute_Path( 'user.name.address' ) );
 
         $this->expect( $attribute_path->to_string() ) ->to() ->equal( 'user.name.address' );
 

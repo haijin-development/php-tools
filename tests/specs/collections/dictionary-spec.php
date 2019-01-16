@@ -1,7 +1,6 @@
 <?php
 
-use Haijin\Tools\Dictionary;
-
+use Haijin\Dictionary;
 
 $spec->describe( "A Dictionary", function() {
 
@@ -84,7 +83,7 @@ $spec->describe( "A Dictionary", function() {
 
         });
 
-        $this->it( "raises a MissingKeyError if the key is missing", function() {
+        $this->it( "raises a Missing_Key_Error if the key is missing", function() {
 
             $dictionary = Dictionary::with( 'a', 1 );
 
@@ -93,7 +92,7 @@ $spec->describe( "A Dictionary", function() {
                 $dictionary->at( 'b' );
 
             }) ->to() ->raise(
-                "Haijin\Tools\MissingKeyError",
+                "Haijin\Missing_Key_Error",
                 function($error) use($dictionary) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -111,7 +110,7 @@ $spec->describe( "A Dictionary", function() {
                 $dictionary[ 'b' ];
 
             }) ->to() ->raise(
-                "Haijin\Tools\MissingKeyError",
+                "Haijin\Missing_Key_Error",
                 function($error) use($dictionary) {
 
                     $this->expect( $error->getMessage() ) ->to()
@@ -182,7 +181,7 @@ $spec->describe( "A Dictionary", function() {
 
         });
 
-        $this->it( "raises a MissingKeyError if the key to remove is missing", function() {
+        $this->it( "raises a Missing_Key_Error if the key to remove is missing", function() {
 
             $dictionary = Dictionary::with_all( [ 'a' => 1, 'b' => 2, 'c' => 3 ] );
 
@@ -191,7 +190,7 @@ $spec->describe( "A Dictionary", function() {
                 $dictionary->remove_at( 'd' );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingKeyError',
+                'Haijin\Missing_Key_Error',
                 function($error) use($dictionary) {
 
                     $this->expect( $error->getMessage() ) ->to()

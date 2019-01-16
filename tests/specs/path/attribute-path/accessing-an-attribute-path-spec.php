@@ -1,8 +1,8 @@
 <?php
 
-use Haijin\Tools\AttributePath;
+use Haijin\Attribute_Path;
 
-$spec->describe( "When accessing an AttributePath", function() {
+$spec->describe( "When accessing an Attribute_Path", function() {
 
     $this->describe( "on associative arrays", function() {
 
@@ -16,7 +16,7 @@ $spec->describe( "When accessing an AttributePath", function() {
                 ]
             ];
 
-            $attribute_path = new AttributePath('address.street');
+            $attribute_path = new Attribute_Path('address.street');
 
             $this->expect( $attribute_path->get_value_from( $object ) ) ->to()
                 ->equal( 'Evergreen 742' );
@@ -33,14 +33,14 @@ $spec->describe( "When accessing an AttributePath", function() {
                 ]
             ];
 
-            $attribute_path = new AttributePath( 'address.number' );
+            $attribute_path = new Attribute_Path( 'address.number' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->get_value_from( $object );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
 
                     $this->expect( $exception->getMessage() ) ->to()
@@ -69,7 +69,7 @@ $spec->describe( "When accessing an AttributePath", function() {
                 ]
             ];
 
-            $attribute_path = new AttributePath( 'address.street' );
+            $attribute_path = new Attribute_Path( 'address.street' );
 
             $attribute_path->set_value_to( $object, 123 );
 
@@ -87,14 +87,14 @@ $spec->describe( "When accessing an AttributePath", function() {
                 ]
             ];
 
-            $attribute_path = new AttributePath( 'address.number' );
+            $attribute_path = new Attribute_Path( 'address.number' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->set_value_to( $object, 123 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
 
                     $this->expect( $exception->getMessage() ) ->to()
@@ -124,7 +124,7 @@ $spec->describe( "When accessing an AttributePath", function() {
                 [ 'Evergreen', '742' ]
             ];
 
-            $attribute_path = new AttributePath( '[1].[0]' );
+            $attribute_path = new Attribute_Path( '[1].[0]' );
 
             $this->expect( $attribute_path->get_value_from( $object ) ) ->to()
                 ->equal( 'Evergreen' );
@@ -138,14 +138,14 @@ $spec->describe( "When accessing an AttributePath", function() {
                 [ 'Evergreen', '742' ]
             ];
 
-            $attribute_path = new AttributePath( '[1].[2]' );
+            $attribute_path = new Attribute_Path( '[1].[2]' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->get_value_from( $object );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
                     $this->expect( $exception->getMessage() ) ->to()
                         ->equal( "The nested attribute \"[1].[2]\" was not found." );
@@ -170,7 +170,7 @@ $spec->describe( "When accessing an AttributePath", function() {
                 [ 'Evergreen', '742' ]
             ];
 
-            $attribute_path = new AttributePath( '[1].[0]' );
+            $attribute_path = new Attribute_Path( '[1].[0]' );
 
             $attribute_path->set_value_to( $object, 123 );
 
@@ -185,14 +185,14 @@ $spec->describe( "When accessing an AttributePath", function() {
                 [ 'Evergreen', '742' ]
             ];
 
-            $attribute_path = new AttributePath( '[1].[2]' );
+            $attribute_path = new Attribute_Path( '[1].[2]' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->set_value_to( $object, 123 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
 
                     $this->expect( $exception->getMessage() ) ->to()
@@ -221,7 +221,7 @@ $spec->describe( "When accessing an AttributePath", function() {
             $object->field = new stdclass();
             $object->field->field = 123;
 
-            $attribute_path = new AttributePath( 'field.field' );
+            $attribute_path = new Attribute_Path( 'field.field' );
 
             $this->expect( $attribute_path->get_value_from( $object ) ) ->to()
                 ->equal( 123 );
@@ -235,14 +235,14 @@ $spec->describe( "When accessing an AttributePath", function() {
             $object->field->field = 123;
 
 
-            $attribute_path = new AttributePath( 'field.field_2' );
+            $attribute_path = new Attribute_Path( 'field.field_2' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->get_value_from( $object );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
 
                     $this->expect( $exception->getMessage() ) ->to()
@@ -267,7 +267,7 @@ $spec->describe( "When accessing an AttributePath", function() {
             $object->field = new stdclass();
             $object->field->field = 123;
 
-            $attribute_path = new AttributePath( 'field.field' );
+            $attribute_path = new Attribute_Path( 'field.field' );
             $attribute_path->set_value_to( $object, 111 );
 
             $this->expect( $object->field->field ) ->to() ->equal( 111 );
@@ -281,14 +281,14 @@ $spec->describe( "When accessing an AttributePath", function() {
             $object->field->field = 123;
 
 
-            $attribute_path = new AttributePath( 'field.field_2' );
+            $attribute_path = new Attribute_Path( 'field.field_2' );
 
             $this->expect( function() use ($object, $attribute_path) {
 
                 $attribute_path->set_value_to( $object, 111 );
 
             }) ->to() ->raise(
-                'Haijin\Tools\MissingAttributeError',
+                'Haijin\Missing_Attribute_Error',
                 function($exception) use ($object, $attribute_path) {
 
                     $this->expect( $exception->getMessage() ) ->to()
