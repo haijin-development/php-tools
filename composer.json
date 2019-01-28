@@ -2,7 +2,7 @@
     "name": "haijin/tools",
     "description": "Common tools to use in PHP applications.",
     "keywords": ["utilities", "path", "collections"],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/haijin-development/php-tools",
@@ -20,7 +20,7 @@
         }
     },
     "require-dev": {
-        "haijin/specs": "^1.0.0"
+        "haijin/specs": "^1.0"
     },
     "autoload": {
         "psr-4": {

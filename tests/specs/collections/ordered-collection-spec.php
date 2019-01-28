@@ -108,6 +108,22 @@ $spec->describe( "An Ordered_Collection", function() {
 
     $this->describe( "when accessing items", function() {
 
+        $this->it( "returns the first item", function() {
+
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
+
+            $this->expect( $collection->first() ) ->to() ->equal( 1 );
+
+        });
+
+        $this->it( "returns the last item", function() {
+
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
+
+            $this->expect( $collection->last() ) ->to() ->equal( 3 );
+
+        });
+
         $this->it( "returns the item at an index", function() {
 
             $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
@@ -373,6 +389,15 @@ $spec->describe( "An Ordered_Collection", function() {
 
     $this->describe( "when removing items", function() {
 
+        $this->it( "removes the first item in the collection", function() {
+
+            $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
+            $collection->remove_first();
+
+            $this->expect( $collection->to_array() ) ->to() ->equal( [ 2, 3 ] );
+
+        });
+
         $this->it( "removes the last item in the collection", function() {
 
             $collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
@@ -500,6 +525,24 @@ $spec->describe( "An Ordered_Collection", function() {
 
             $this->expect( $item ) ->to() ->equal( "absent index" );
             $this->expect( $collection->to_array() ) ->to() ->equal( [ 1, 2, 3 ] );
+
+        });
+
+        $this->it( "removes all the ocurrences of an item in the collection", function() {
+
+            $collection = Ordered_Collection::with_all( [ 'a', 'b', 'a', 'c', 'a' ] );
+            $collection->remove( 'a' );
+
+            $this->expect( $collection->to_array() ) ->to() ->equal( [ 'b', 'c' ] );
+
+        });
+
+        $this->it( "does not fail when removing an absent item from the collection", function() {
+
+            $collection = Ordered_Collection::with_all( [ 'a', 'b', 'c' ] );
+            $collection->remove( 'd' );
+
+            $this->expect( $collection->to_array() ) ->to() ->equal( [ 'a', 'b', 'c' ] );
 
         });
 

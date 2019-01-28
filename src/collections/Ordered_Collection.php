@@ -209,6 +209,34 @@ class Ordered_Collection implements \ArrayAccess
     /// Accessing items by index
 
     /**
+     * Returns the first item.
+     *
+     *  Example
+     *
+     *      $item = $ordered_collection->first();
+     *
+     * @return object The item at the first position.
+     */
+    public function first()
+    {
+        return $this->at( 0 );
+    }
+
+    /**
+     * Returns the last item.
+     *
+     *  Example
+     *
+     *      $item = $ordered_collection->last();
+     *
+     * @return object The item at the last position.
+     */
+    public function last()
+    {
+        return $this->at( count( $this->items ) - 1 );
+    }
+
+    /**
      * Returns the item at the $index position.
      *
      *  Example
@@ -299,6 +327,20 @@ class Ordered_Collection implements \ArrayAccess
     /// Removing elements
 
     /**
+     * Removes the first item.
+     *
+     *  Example
+     *
+     *      $item = $ordered_collection->remove_first();
+     *
+     * @return object The last item removed.
+     */
+    public function remove_first()
+    {
+        return $this->remove_at( 0 );
+    }
+
+    /**
      * Removes the last item.
      *
      *  Example
@@ -309,13 +351,7 @@ class Ordered_Collection implements \ArrayAccess
      */
     public function remove_last()
     {
-        // Implementation note: optimized implementation
-
-        if( $this->is_empty() ) {
-            return;
-        }
-
-        return $this->remove_at( $this->size() - 1 );
+        return $this->remove_at( count( $this->items ) - 1 );
     }
 
     /**
@@ -378,6 +414,32 @@ class Ordered_Collection implements \ArrayAccess
         );
 
         return $item;
+    }
+
+    /**
+     * Removes all the ocurrences of an item in the collection.
+     *
+     *  Example
+     *
+     *      $item = $ordered_collection->remove( $object );
+     *
+     * @return object Returns $this collection.
+     */
+    public function remove($item)
+    {
+        // Implementation note: optimized
+
+        $items = [];
+
+        foreach( $this->items as $each_item ) {
+            if( $each_item != $item ) {
+                $items[] = $each_item;
+            }
+        }
+
+        $this->items = $items;
+
+        return $this;
     }
 
     /// Querying

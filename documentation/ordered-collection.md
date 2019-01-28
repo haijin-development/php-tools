@@ -173,6 +173,32 @@ public function add_all_at($items, $index);
 
 ```php
 /**
+ * Returns the first item.
+ *
+ *  Example
+ *
+ *      $item = $ordered_collection->first();
+ *
+ * @return object The item at the first position.
+ */
+public function first();
+```
+
+```php
+/**
+ * Returns the last item.
+ *
+ *  Example
+ *
+ *      $item = $ordered_collection->last();
+ *
+ * @return object The item at the last position.
+ */
+public function last();
+```
+
+```php
+/**
  * Returns the item at the $index position.
  *
  *  Example
@@ -245,6 +271,19 @@ public function at_put($index, $item);
 
 ```php
 /**
+ * Removes the first item.
+ *
+ *  Example
+ *
+ *      $item = $ordered_collection->remove_first();
+ *
+ * @return object The last item removed.
+ */
+public function remove_first();
+```
+
+```php
+/**
  * Removes the last item.
  *
  *  Example
@@ -291,6 +330,19 @@ public function remove_at($index);
  * @return object The item removed.
  */
 public function remove_at_if_absent($index, $absent_closure, $binding = null);
+```
+
+```php
+/**
+ * Removes all the ocurrences of an item in the collection.
+ *
+ *  Example
+ *
+ *      $item = $ordered_collection->remove( $object );
+ *
+ * @return object Returns $this collection.
+ */
+public function remove($item);
 ```
 
 <a name="c-2-5" ></a>
