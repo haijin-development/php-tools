@@ -315,11 +315,7 @@ class Ordered_Collection implements \ArrayAccess
             return;
         }
 
-        $item = $this->items[ count( $this->items ) - 1 ];
-
-        unset( $this->items[ count( $this->items ) - 1 ] );
-
-        return $item;
+        return $this->remove_at( $this->size() - 1 );
     }
 
     /**
