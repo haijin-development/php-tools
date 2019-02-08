@@ -4,7 +4,7 @@ use Haijin\File_Path;
 
 $spec->describe( "When appending to a File_Path", function() {
 
-    $this->it( "testConcatenatesAString", function() {
+    $this->it( "appends a string", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( 'dev/src' );
 
@@ -12,7 +12,7 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnEmptyString", function() {
+    $this->it( "appends an empty string", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( '' );
 
@@ -20,7 +20,15 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnArray", function() {
+    $this->it( "appends a string begining with a slash /", function() {
+
+        $file_path = ( new File_Path( 'home' ) )->append( '/dev/src' );
+
+        $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
+
+    });
+
+    $this->it( "appends an array", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( [ 'dev', 'src' ] );
 
@@ -29,7 +37,7 @@ $spec->describe( "When appending to a File_Path", function() {
     });
 
 
-    $this->it( "testConcatenatesAnEmptyArray", function() {
+    $this->it( "appends an empty array", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( [] );
 
@@ -37,7 +45,7 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnFilePath", function() {
+    $this->it( "appends a File_Path", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( new File_Path( 'dev/src' ) );
 
@@ -45,7 +53,7 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnEmptyPath", function() {
+    $this->it( "appends an empty File_Path", function() {
 
         $file_path = ( new File_Path( 'home' ) )->append( new File_Path() );
 
@@ -53,7 +61,7 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testModifiesTheReceiverInstance", function() {
+    $this->it( "modifies the receiver instance", function() {
 
         $file_path = new File_Path( 'home' );
         $file_path->append( 'dev/src' );
@@ -62,7 +70,7 @@ $spec->describe( "When appending to a File_Path", function() {
 
     });
 
-    $this->it( "testReturnsThisInstance", function() {
+    $this->it( "returns this instance", function() {
 
         $file_path = new File_Path( 'home' );
         $concatenated_path = $file_path->append( 'dev/src' );

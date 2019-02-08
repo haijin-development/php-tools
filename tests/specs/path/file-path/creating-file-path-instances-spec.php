@@ -20,6 +20,14 @@ $spec->describe( "When creating File_Path instances", function() {
 
     });
 
+    $this->it( "creates a path from a string ending with a slash /", function() {
+
+        $file_path = new File_Path( 'home/dev/src/' );
+
+        $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
+
+    });
+
     $this->it( "creates a path from an files array", function() {
 
         $file_path = new File_Path( ['home', 'dev', 'src'] );

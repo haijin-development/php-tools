@@ -22,7 +22,11 @@ class Files_Cache
 
     public function get_cache_folder()
     {
-        return $this->cache_folder->to_string();
+        if( $this->cache_folder !== null ) {
+            return $this->cache_folder->to_string();
+        }
+
+        return null;
     }
 
     public function set_cache_folder($folder)
@@ -38,7 +42,11 @@ class Files_Cache
 
     public function get_manifest_filename()
     {
-        return $this->manifest_filename->to_string();
+        if( $this->manifest_filename !== null ) {
+            return $this->manifest_filename->to_string();
+        }
+
+        return null;
     }
 
     public function set_manifest_filename($filename)
@@ -85,11 +93,11 @@ class Files_Cache
         return $this->manifest->needs_caching( $source_file );
     }
 
-    public function get_path_of( $key )
+    public function get_path_of( $source_file )
     {
         $this->validate_lock();
 
-        return $this->manifest->get_cached_path_of( $key );
+        return $this->manifest->get_cached_path_of( $source_file );
     }
 
     /// Locking

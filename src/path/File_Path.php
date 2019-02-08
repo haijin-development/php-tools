@@ -104,6 +104,11 @@ class File_Path extends Path
     {
         parent::__construct( $attributes_chain );
 
+        $length = $this->length();
+        if( $length > 0 && $this->path[ $length - 1 ] == "" ) {
+            $this->path = array_slice( $this->path, 0, $length - 1 );
+        }
+
         $this->protocol = null;
         $this->is_absolute = false;
 
@@ -321,8 +326,52 @@ class File_Path extends Path
         file_put_contents( $this->to_string(), $contents );
     }
 
-    public function create_folder_path()
+    public function create_folder_path($permissions = 0777)
     {
-        mkdir( $this->to_string(), 0777, true );
+        mkdir( $this->to_string(), $permissions, true );
+    }
+
+    public function delete()
+    {
+        if( $this->exists_folder() ) {
+
+            $this->delete_folder();
+
+        } elseif( $this->exists_file() ) {
+
+            $this->delete_file();
+
+        }
+    }
+
+    public function delete_file()
+    {
+        unlink( $this->to_string() );
+    }
+
+    public function delete_folder()
+    {
+        foreach( $this->get_folder_contents() as $file_or_folder ) {
+
+            $file_or_folder->delete();
+
+        }
+
+        if( $this->exists_folder() ) {
+            rmdir( $this->to_string() );
+        }
+    }
+
+    public function get_folder_contents($search_pattern = "*")
+    {
+        $files = glob( $this->concat( $search_pattern )->to_string() );
+
+        $file_paths = [];
+
+        foreach( $files as $file ) {
+            $file_paths[] = new self( $file );
+        }
+
+        return $file_paths;
     }
 }

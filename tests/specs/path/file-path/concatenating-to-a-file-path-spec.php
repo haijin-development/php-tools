@@ -20,6 +20,14 @@ $spec->describe( "When concatenanting to a File_Path", function() {
 
     });
 
+    $this->it( "concatenates a string starting with a slash /", function() {
+
+        $file_path = ( new File_Path( 'home' ) )->concat( '/dev/src' );
+
+        $this->expect( $file_path->to_string() ) ->to() ->equal( 'home/dev/src' );
+
+    });
+
     $this->it( "concatenates an array", function() {
 
         $file_path = ( new File_Path( 'home' ) )->concat( [ 'dev', 'src' ] );

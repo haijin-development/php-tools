@@ -8,13 +8,13 @@ $spec->describe( "A Files_Cache", function() {
 
     $this->before_each( function() {
 
-        $this->remove_folder( $this->cache_folder );
+        ( new File_Path( $this->cache_folder ) )->delete();
 
     });
 
     $this->after_all( function() {
 
-        $this->remove_folder( $this->cache_folder );
+        ( new File_Path( $this->cache_folder ) )->delete();
 
     });
 
