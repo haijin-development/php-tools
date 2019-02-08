@@ -219,7 +219,7 @@ class Dictionary implements \ArrayAccess
      *
      *  Example
      *
-     *      $dictionary->merge_with( [ 'key', 123 ] );
+     *      $dictionary->merge_with( [ 'key' => 123 ] );
      *      $dictionary->merge_with( $another_dictionary );
      *
      * @param array|Dictionary $dictionary The associations to merge into $this dictionary.
@@ -404,7 +404,7 @@ class Dictionary implements \ArrayAccess
      */
     public function to_array()
     {
-        return array_slice( $this->associations, 0 );
+        return $this->associations;
     }
 
     /**

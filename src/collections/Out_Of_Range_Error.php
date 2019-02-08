@@ -2,7 +2,7 @@
 
 namespace Haijin;
 
-class Out_Of_Range_Error extends \Exception
+class Out_Of_Range_Error extends \RuntimeException
 {
     public function __construct($message, $collection, $index)
     {

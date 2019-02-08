@@ -833,7 +833,7 @@ class Ordered_Collection implements \ArrayAccess
      */
     public function to_array()
     {
-        return array_slice( $this->items, 0 );
+        return $this->items;
     }
 
     /**

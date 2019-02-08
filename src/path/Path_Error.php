@@ -5,6 +5,6 @@ namespace Haijin;
 /**
  * Models an Path error.
  */
-class Path_Error extends \Exception
+class Path_Error extends \RuntimeException
 {
 }

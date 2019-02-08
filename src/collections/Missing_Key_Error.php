@@ -2,7 +2,7 @@
 
 namespace Haijin;
 
-class Missing_Key_Error extends \Exception
+class Missing_Key_Error extends \RuntimeException
 {
     public function __construct($message, $dictionary, $key)
     {
