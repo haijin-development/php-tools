@@ -303,10 +303,49 @@ $path->be_relative( false );
 <a name="c-2-7"></a>
 ### File_Path file operations
 
-Read the contents of the file at the path with
-
 ```php
-$path = new File_Path( 'user/address/street' );
+public function exists_file();
 
-$path->file_contents();
+public function exists_folder();
+
+/**
+ * Reads and returns the contents of the file at $this File_Path.
+ *
+ * @return string  The contents of the file at $this File_Path.
+ */
+public function file_contents();
+
+/**
+ * Writes the contents to the file at $this File_Path.
+ *
+ * @param string  The contents to write to the file at $this File_Path.
+ */
+public function write_contents($contents);
+
+/**
+ * Recursively creates a subfolder tree from $this File_Path.
+ */
+public function create_folder_path($permissions = 0777);
+
+/**
+ * Deletes the file or the folder with all of its contents.
+ */
+public function delete();
+
+/**
+ * Deletes the file.
+ */
+public function delete_file();
+
+/**
+ * Recursively deletes the folder and its contents.
+ */
+public function delete_folder();
+
+/**
+ * Returns the contents of the folder with the given pattern.
+ * If no pattern is given returns all the files and folders that are direct
+ * children from $this folder.
+ */
+public function get_folder_contents($search_pattern = "*");
 ```

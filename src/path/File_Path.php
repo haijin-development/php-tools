@@ -326,11 +326,17 @@ class File_Path extends Path
         file_put_contents( $this->to_string(), $contents );
     }
 
+    /**
+     * Recursively creates a subfolder tree from $this File_Path.
+     */
     public function create_folder_path($permissions = 0777)
     {
         mkdir( $this->to_string(), $permissions, true );
     }
 
+    /**
+     * Deletes the file or the folder with all of its contents.
+     */
     public function delete()
     {
         if( $this->exists_folder() ) {
@@ -344,11 +350,17 @@ class File_Path extends Path
         }
     }
 
+    /**
+     * Deletes the file.
+     */
     public function delete_file()
     {
         unlink( $this->to_string() );
     }
 
+    /**
+     * Recursively deletes the folder and its contents.
+     */
     public function delete_folder()
     {
         foreach( $this->get_folder_contents() as $file_or_folder ) {
@@ -362,6 +374,11 @@ class File_Path extends Path
         }
     }
 
+    /**
+     * Returns the contents of the folder with the given pattern.
+     * If no pattern is given returns all the files and folders that are direct
+     * children from $this folder.
+     */
     public function get_folder_contents($search_pattern = "*")
     {
         $files = glob( $this->concat( $search_pattern )->to_string() );

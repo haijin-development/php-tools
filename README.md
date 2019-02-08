@@ -7,7 +7,7 @@ Common tools to use in PHP applications.
 [![Build Status](https://travis-ci.org/haijin-development/php-tools.svg?branch=master)](https://travis-ci.org/haijin-development/php-tools)
 [![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
 
-### Version 1.0.1
+### Version 1.1.0
 
 If you like it a lot you may contribute by [financing](https://github.com/haijin-development/support-haijin-development) its development.
 
@@ -21,6 +21,7 @@ If you like it a lot you may contribute by [financing](https://github.com/haijin
     4. [Closure_Context](#c-2-4)
     5. [Ordered_Collection](#c-2-5)
     6. [Dictionary](#c-2-6)
+    7. [Files_Cache](#c-2-7)
 3. [Running the tests](#c-3)
 
 <a name="c-1"></a>
@@ -34,7 +35,7 @@ Include this library in your project `composer.json` file:
 
     "require": {
         ...
-        "haijin/tools": "^1.0",
+        "haijin/tools": "^1.1",
         ...
     },
 
@@ -208,6 +209,64 @@ print $dictionary->remove_at( 'a' ); // 10
 
 * [Dictionary protocol](./documentation/dictionary.md).
 
+
+<a name="c-2-7"></a>
+### Files_Cache
+
+A very simple cache folder for files.
+
+Example of using it to cache generated content for cached files:
+
+```php
+use Haijin\Files_Cache;
+
+$cache = new Files_Cache()
+
+$cache->set_cache_folder( "resources/css" );
+
+$cache->locking_do( function($cache) use($sass_filename) {
+
+    if( $cache->needs_caching( $sass_filename ) ) {
+
+        $css_contents = $this->sass_to_css( file_get_contents( $sass_filename ) );
+
+        $cache->cache_file_contents(
+            $sass_filename,
+            $css_contents,
+            $filename . ".css"
+        );
+
+    }
+
+    return $this->cache->get_path_of( $sass_filename );
+
+});
+```
+
+Example of using it to cache copied files from a resource folder to a public one:
+
+```php
+use Haijin\Files_Cache;
+
+$cache = new Files_Cache()
+
+$cache->set_cache_folder( "public/css" );
+
+$cache->locking_do( function($cache) use($filename) {
+
+    if( $cache->needs_caching( $filename ) ) {
+
+        $cache->cache_file(
+            $filename,
+            $filename
+        );
+
+    }
+
+    return $this->cache->get_path_of( $filename );
+
+});
+```
 
 <a name="c-3"></a>
 ## Running the tests
