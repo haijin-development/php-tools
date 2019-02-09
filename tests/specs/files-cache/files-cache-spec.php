@@ -193,7 +193,7 @@ $spec->describe( "A Files_Cache", function() {
                 $this->cache->cache_file_contents(
                     $this->source_file,
                     "123",
-                    "file-sample.txt"
+                    "subfolder/file-sample.txt"
                 );
 
                 touch( $this->source_file );

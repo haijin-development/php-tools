@@ -64,6 +64,8 @@ class Files_Cache
 
         $cached_filename = $this->cache_folder->concat( $filename );
 
+        $this->ensure_cache_file_folder_exists( $cached_filename );
+
         $cached_filename->write_contents( $contents );
 
         $this->manifest->at_put( $source_filename, $cached_filename );
@@ -77,11 +79,20 @@ class Files_Cache
 
         $cached_filename = $this->cache_folder->concat( $filename );
 
+        $this->ensure_cache_file_folder_exists( $cached_filename );
+
         copy( $source_filename, $cached_filename->to_string() );
 
         $this->manifest->at_put( $source_filename, $cached_filename );
 
         $this->manifest->write();
+    }
+
+    protected function ensure_cache_file_folder_exists($cached_filename)
+    {
+        if( ! $cached_filename->back()->exists_folder() ) {
+            $cached_filename->back()->create_folder_path();
+        }
     }
 
     /// Querying
