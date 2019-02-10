@@ -82,6 +82,22 @@ abstract class Path
     }
 
     /**
+     * Returns true if the path is empty.
+     */
+    public function is_empty()
+    {
+        return $this->length() == 0;
+    }
+
+    /**
+     * Returns true if the path is not empty.
+     */
+    public function not_empty()
+    {
+        return ! $this->is_emptym();
+    }
+
+    /**
      * Returns the last attribute in the path.
      *
      * @return string The last attribute in the path.
@@ -178,6 +194,51 @@ abstract class Path
         $this->path = array_merge( $this->path, $attributes_chain->to_array() );
 
         return $this;
+    }
+
+    /**
+     * Returns the common root between $this path and another one.
+     */
+    public function root_in_common_with($another_path)
+    {
+        $n = min( $this->length(), $another_path->length() );
+
+        $this_array = $this->to_array();
+        $another_path_array = $another_path->to_array();
+
+        $common_path = $this->new_instance_with( [] );
+
+        for( $i = 0; $i < $n; $i++ ) {
+            if( $this_array[ $i ] != $another_path_array[ $i ] ) {
+                break;
+            }
+
+            $common_path->append( $this_array[ $i] );
+        }
+
+        return $common_path;
+    }
+
+    /// Comparing
+
+    /**
+     * Returns true if $this path is equal to $another_path.
+     */
+    public function equals($another_path)
+    {
+        return $this->to_array() == $another_path->to_array();
+    }
+
+    /**
+     * Returns true if $this path is subpath of $another_path.
+     */
+    public function begins_with($another_path)
+    {
+        if( $another_path->is_empty() ) {
+            return true;
+        }
+
+        return $this->root_in_common_with( $another_path )->length() > 0;
     }
 
     /// Converting
