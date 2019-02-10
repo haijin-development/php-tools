@@ -51,7 +51,11 @@ class Files_Cache
 
     public function set_manifest_filename($filename)
     {
-        $this->manifest_filename = new File_Path( $filename );
+        $filename = new File_Path( $filename );
+
+        $this->ensure_manifest_file_folder_exists( $filename );
+
+        $this->manifest_filename = $filename;
 
         return $this;
     }
@@ -92,6 +96,13 @@ class Files_Cache
     {
         if( ! $cached_filename->back()->exists_folder() ) {
             $cached_filename->back()->create_folder_path();
+        }
+    }
+
+    protected function ensure_manifest_file_folder_exists($manifest_filename)
+    {
+        if( ! $manifest_filename->back()->exists_folder() ) {
+            $manifest_filename->back()->create_folder_path();
         }
     }
 

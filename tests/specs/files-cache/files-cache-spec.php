@@ -9,18 +9,20 @@ $spec->describe( "A Files_Cache", function() {
     $this->before_each( function() {
 
         ( new File_Path( $this->cache_folder ) )->delete();
+        ( new File_Path( "tests/another-folder/" ) )->delete();
 
     });
 
     $this->after_all( function() {
 
         ( new File_Path( $this->cache_folder ) )->delete();
+        ( new File_Path( "tests/another-folder/" ) )->delete();
 
     });
 
     $this->let( "cache_folder", function() {
 
-        return __DIR__ . "/../../cache";
+        return "tests/cache";
 
     });
 
@@ -33,7 +35,7 @@ $spec->describe( "A Files_Cache", function() {
 
     $this->let( "source_file", function() {
 
-        return __DIR__ . "/../../file-samples/file-sample.txt";
+        return "tests/file-samples/file-sample.txt";
 
     });
 
@@ -53,12 +55,15 @@ $spec->describe( "A Files_Cache", function() {
         $this->it( "defines its file manifest", function() {
 
             $this->cache->set_cache_folder( "cache" );
-            $this->cache->set_manifest_filename( "/another-folder/manifest.txt" );
+            $this->cache->set_manifest_filename( "tests/another-folder/manifest.txt" );
 
             $this->expect( $this->cache->get_cache_folder() ) ->to() ->equal( "cache" );
 
             $this->expect( $this->cache->get_manifest_filename() )
-                    ->to() ->equal( "/another-folder/manifest.txt" );
+                    ->to() ->equal( "tests/another-folder/manifest.txt" );
+
+            $this->expect( "tests/another-folder/" )
+                    ->to() ->be() ->a_folder();
 
         });
 
