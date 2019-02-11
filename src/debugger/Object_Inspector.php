@@ -162,7 +162,7 @@ class Object_Inspector
         }
 
         if( is_object( $object ) ) {
-            return get_class( $this->object );
+            return get_class( $object );
         }
 
         return "Unkown type";

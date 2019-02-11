@@ -7,7 +7,7 @@ Common tools to use in PHP applications.
 [![Build Status](https://travis-ci.org/haijin-development/php-tools.svg?branch=master)](https://travis-ci.org/haijin-development/php-tools)
 [![License](https://poser.pugx.org/haijin/tools/license)](https://packagist.org/packages/haijin/tools)
 
-### Version 1.1.2
+### Version 1.1.3
 
 If you like it a lot you may contribute by [financing](https://github.com/haijin-development/support-haijin-development) its development.
 
@@ -277,13 +277,13 @@ Instead of using `var_dump`, recursively inspect any value, array or object with
 For console and files logging:
 
 ```php
-\Haijin\Debugger::inspect( $object );
+echo \Haijin\Debugger::inspect( $object );
 ```
 
 For html logging:
 
 ```php
-\Haijin\Debugger::web_inspect( $object );
+echo \Haijin\Debugger::web_inspect( $object );
 ```
 
 <a name="c-3"></a>
