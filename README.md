@@ -22,6 +22,7 @@ If you like it a lot you may contribute by [financing](https://github.com/haijin
     5. [Ordered_Collection](#c-2-5)
     6. [Dictionary](#c-2-6)
     7. [Files_Cache](#c-2-7)
+    8. [Debugger](#c-2-8)
 3. [Running the tests](#c-3)
 
 <a name="c-1"></a>
@@ -266,6 +267,23 @@ $cache->locking_do( function($cache) use($filename) {
     return $this->cache->get_path_of( $filename );
 
 });
+```
+
+<a name="c-2-8"></a>
+## Debugger
+
+Instead of using `var_dump`, recursively inspect any value, array or object with the much more expressive and clear `\Haijin\Debugger`.
+
+For console and files logging:
+
+```php
+\Haijin\Debugger::inspect( $object );
+```
+
+For html logging:
+
+```php
+\Haijin\Debugger::web_inspect( $object );
 ```
 
 <a name="c-3"></a>
