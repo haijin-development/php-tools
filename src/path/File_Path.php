@@ -323,7 +323,7 @@ class File_Path extends Path
      */
     public function write_contents($contents)
     {
-        file_put_contents( $this->to_string(), $contents );
+        return file_put_contents( $this->to_string(), $contents );
     }
 
     /**
@@ -331,7 +331,7 @@ class File_Path extends Path
      */
     public function create_folder_path($permissions = 0777)
     {
-        mkdir( $this->to_string(), $permissions, true );
+        return mkdir( $this->to_string(), $permissions, true );
     }
 
     /**
@@ -341,11 +341,11 @@ class File_Path extends Path
     {
         if( $this->exists_folder() ) {
 
-            $this->delete_folder();
+            return $this->delete_folder();
 
         } elseif( $this->exists_file() ) {
 
-            $this->delete_file();
+            return $this->delete_file();
 
         }
     }
@@ -355,7 +355,7 @@ class File_Path extends Path
      */
     public function delete_file()
     {
-        unlink( $this->to_string() );
+        return unlink( $this->to_string() );
     }
 
     /**
@@ -370,7 +370,7 @@ class File_Path extends Path
         }
 
         if( $this->exists_folder() ) {
-            rmdir( $this->to_string() );
+            return rmdir( $this->to_string() );
         }
     }
 
