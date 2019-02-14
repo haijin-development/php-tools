@@ -12,7 +12,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnEmptyString", function() {
+    $this->it( "concatenates an empty string", function() {
 
         $attribute_path = ( new Attribute_Path( 'user' ) )->concat( '' );
 
@@ -20,7 +20,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnArray", function() {
+    $this->it( "concatenates an array", function() {
 
         $attribute_path = ( new Attribute_Path( 'user' ) )->concat( [ 'address', 'street' ] );
 
@@ -29,7 +29,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
     });
 
 
-    $this->it( "testConcatenatesAnEmptyArray", function() {
+    $this->it( "concatenates an empty array", function() {
 
         $attribute_path = ( new Attribute_Path( 'user' ) )->concat( [] );
 
@@ -37,7 +37,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnAttributePath", function() {
+    $this->it( "concatenates an Attribute_Path", function() {
 
         $attribute_path = ( new Attribute_Path( 'user' ) )->concat( new Attribute_Path( 'address.street' ) );
 
@@ -45,7 +45,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
 
     });
 
-    $this->it( "testConcatenatesAnEmptyPath", function() {
+    $this->it( "concatenates an empty path", function() {
 
         $attribute_path = ( new Attribute_Path( 'user' ) )->concat( new Attribute_Path() );
 
@@ -53,7 +53,7 @@ $spec->describe( "When concatenating to an Attribute_Path", function() {
 
     });
 
-    $this->it( "testDoesNotModifyTheReceiverInstance", function() {
+    $this->it( "does not modify the receiver instance", function() {
 
         $attribute_path = new Attribute_Path( 'user' );
         $concatenated_path = $attribute_path->concat( 'address.street' );

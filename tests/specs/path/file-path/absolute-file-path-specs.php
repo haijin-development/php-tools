@@ -27,7 +27,7 @@ $spec->describe( "An absolute File_Path", function() {
 
     $this->it( "is created from an array", function() {
 
-        $file_path = new File_Path( [ '/home' ] );
+        $file_path = new File_Path( [ 'home' ], true );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "/home" );
 
@@ -41,6 +41,17 @@ $spec->describe( "An absolute File_Path", function() {
         $file_path = new File_Path( new File_Path( '/home' ) );
 
         $this->expect( $file_path->to_string() ) ->to() ->equal( "/home" );
+
+        $this->expect( $file_path->is_relative() ) ->to() ->be() ->false();
+        $this->expect( $file_path->is_absolute() ) ->to() ->be() ->true();
+
+    });
+
+    $this->it( "preserves the absoluteness when creating a path from another path", function() {
+
+        $file_path = new File_Path( new File_Path( '/home/dev/src' ) );
+
+        $this->expect( $file_path->to_string() ) ->to() ->equal( "/home/dev/src" );
 
         $this->expect( $file_path->is_relative() ) ->to() ->be() ->false();
         $this->expect( $file_path->is_absolute() ) ->to() ->be() ->true();

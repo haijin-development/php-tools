@@ -19,6 +19,11 @@ abstract class Path
      */
     protected $separator;
 
+    /**
+     * Flags if $this Path is absolute or relative.
+     */
+    protected $is_absolute;
+
     /// Initializing
 
     /**
@@ -29,10 +34,11 @@ abstract class Path
      *
      * @param string|array|Path $attributes_chain The attributes to initialize $this object with.
      */
-    public function __construct($attributes_chain = null)
+    public function __construct($attributes_chain = null, $is_absolute = false)
     {
         $this->path = [];
         $this->separator = $this->default_separator();
+        $this->is_absolute = $is_absolute;
 
         if( $attributes_chain !== null )
             $this->path = $this->normalize_attributes_chain( $attributes_chain );
@@ -47,15 +53,28 @@ abstract class Path
      */
     protected function normalize_attributes_chain($attributes_chain)
     {
-        if( is_array( $attributes_chain ) )
-            return $attributes_chain;
+        if( is_array( $attributes_chain ) ) {
 
-        if( is_string( $attributes_chain ) ){
-            if( $attributes_chain == '' ) return [];
-            return explode( $this->separator, $attributes_chain );
+            $attributes = $attributes_chain;
+
+        } elseif( is_string( $attributes_chain ) ) {
+
+            $attributes = explode( $this->separator, $attributes_chain );
+
+            if( isset( $attributes[ 0 ] ) && $attributes[ 0 ] == "" ) {
+                $this->is_absolute = true;
+            }
+
+        } else {
+
+            $attributes = $attributes_chain->to_array();
+            $this->be_absolute( $attributes_chain->is_absolute() );
+
         }
 
-        return $attributes_chain->to_array();        
+        $attributes = array_values( array_filter( $attributes ) );
+
+        return $attributes;
     }
 
     /// Constants
@@ -68,6 +87,18 @@ abstract class Path
      * to a string.
      */
     public abstract function default_separator();
+
+    public function be_absolute( $is_absolute = true )
+    {
+        $this->is_absolute = $is_absolute;
+
+        return $this;
+    }
+
+    public function be_relative( $is_relative = true )
+    {
+        return $this->be_absolute( !$is_relative );
+    }
 
     /// Querying
 
@@ -95,6 +126,26 @@ abstract class Path
     public function not_empty()
     {
         return ! $this->is_emptym();
+    }
+
+    /**
+     * Returns true if $this File_Path is absolute, false if its relative.
+     *
+     * @return bool Returns true if $this File_Path is absolute, false if its relative.
+     */
+    public function is_absolute()
+    {
+        return $this->is_absolute;
+    }
+
+    /**
+     * Returns false if $this File_Path is relative, false if its absolute.
+     *
+     * @return bool Returns false if $this File_Path is relative, false if its absolute.
+     */
+    public function is_relative()
+    {
+        return !$this->is_absolute();
     }
 
     /**
@@ -127,6 +178,7 @@ abstract class Path
     public function concat($attributes_chain)
     {
         $new_path = $this->new_instance_with( $this );
+
         return $new_path->append( $attributes_chain );
     }
 
@@ -149,6 +201,7 @@ abstract class Path
         }
 
         $new_path = $this->new_instance_with( $this->to_array() );
+
         return $new_path->drop( $n );
     }
 
@@ -320,6 +373,6 @@ abstract class Path
     protected function new_instance_with( $attributes_chain )
     {
         $class = get_class( $this );
-        return new $class( $attributes_chain );
+        return new $class( $attributes_chain, $this->is_absolute );
     }
 }

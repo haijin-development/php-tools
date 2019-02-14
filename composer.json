@@ -1,8 +1,8 @@
 {
+    "minumum-stability": "dev",
     "name": "haijin/tools",
     "description": "Common tools to use in PHP applications.",
     "keywords": ["utilities", "path", "collections"],
-    "version": "1.1.5",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/haijin-development/php-tools",
@@ -19,8 +19,17 @@
             "php": "7.1"
         }
     },
+    "repositories": {
+        "haijin/specs": {
+            "type": "path",
+            "url": "../php-specs",
+            "options": {
+            "symlink": true
+            }
+        }
+    },
     "require-dev": {
-        "haijin/specs": "^1.1"
+        "haijin/specs": "dev-development"
     },
     "autoload": {
         "psr-4": {

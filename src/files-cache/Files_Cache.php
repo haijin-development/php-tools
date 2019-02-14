@@ -95,14 +95,20 @@ class Files_Cache
     protected function ensure_cache_file_folder_exists($cached_filename)
     {
         if( ! $cached_filename->back()->exists_folder() ) {
-            $cached_filename->back()->create_folder_path();
+
+            if( $cached_filename->back()->create_folder_path() == false ) {
+                throw new \Exception( "Could not create cache folder '{$cached_filename->back()->create_folder_path()}'" );
+            }
         }
     }
 
     protected function ensure_manifest_file_folder_exists($manifest_filename)
     {
         if( ! $manifest_filename->back()->exists_folder() ) {
-            $manifest_filename->back()->create_folder_path();
+
+            if( $manifest_filename->back()->create_folder_path() == false ) {
+                throw new \Exception( "Could not create manifest folder '{$manifest_filename->back()->create_folder_path()}'" );
+            }
         }
     }
 

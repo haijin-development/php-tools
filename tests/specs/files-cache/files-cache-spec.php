@@ -9,14 +9,14 @@ $spec->describe( "A Files_Cache", function() {
     $this->before_each( function() {
 
         ( new File_Path( $this->cache_folder ) )->delete();
-        ( new File_Path( "tests/another-folder/" ) )->delete();
+        ( new File_Path( "tests/tmp" ) )->delete();
 
     });
 
     $this->after_all( function() {
 
         ( new File_Path( $this->cache_folder ) )->delete();
-        ( new File_Path( "tests/another-folder/" ) )->delete();
+        ( new File_Path( "tests/tmp" ) )->delete();
 
     });
 
@@ -43,26 +43,26 @@ $spec->describe( "A Files_Cache", function() {
 
         $this->it( "defines its cache folder", function() {
 
-            $this->cache->set_cache_folder( "cache" );
+            $this->cache->set_cache_folder( "tests/cache" );
 
-            $this->expect( $this->cache->get_cache_folder() ) ->to() ->equal( "cache" );
+            $this->expect( $this->cache->get_cache_folder() ) ->to() ->equal( "tests/cache" );
 
             $this->expect( $this->cache->get_manifest_filename() )
-                    ->to() ->equal( "cache/cached_file_manifest.json" );
+                    ->to() ->equal( "tests/cache/cached_file_manifest.json" );
 
         });
 
         $this->it( "defines its file manifest", function() {
 
-            $this->cache->set_cache_folder( "cache" );
-            $this->cache->set_manifest_filename( "tests/another-folder/manifest.txt" );
+            $this->cache->set_cache_folder( "tests/cache" );
+            $this->cache->set_manifest_filename( "tests/tmp/another-folder/manifest.txt" );
 
-            $this->expect( $this->cache->get_cache_folder() ) ->to() ->equal( "cache" );
+            $this->expect( $this->cache->get_cache_folder() ) ->to() ->equal( "tests/cache" );
 
             $this->expect( $this->cache->get_manifest_filename() )
-                    ->to() ->equal( "tests/another-folder/manifest.txt" );
+                    ->to() ->equal( "tests/tmp/another-folder/manifest.txt" );
 
-            $this->expect( "tests/another-folder/" )
+            $this->expect( "tests/tmp/another-folder/" )
                     ->to() ->be() ->a_folder();
 
         });
