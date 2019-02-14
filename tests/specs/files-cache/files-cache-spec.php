@@ -213,6 +213,23 @@ $spec->describe( "A Files_Cache", function() {
 
     });
 
+    $this->it( "locking is reentrant", function() {
+
+        $needs_caching = $this->cache->locking_do( function ($cache) {
+
+            return $this->cache->locking_do( function ($cache) {
+
+                return $cache->needs_caching( $this->source_file );
+
+            }, $this );
+
+        }, $this );
+
+
+        $this->expect( $needs_caching ) ->to() ->be() ->true();
+
+    });
+
     $this->it( "raises an error if the cached file is missing", function() {
 
         $this->expect( function() {

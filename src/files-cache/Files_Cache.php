@@ -130,6 +130,10 @@ class Files_Cache
             $binding = $this;
         }
 
+        if( $this->manifest !== null ) {
+            return $closure->call( $binding, $this );
+        }
+
         $this->manifest = $this->get_manifest();
 
         $this->manifest->lock();
