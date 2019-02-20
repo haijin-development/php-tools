@@ -95,7 +95,7 @@ $spec->describe( "When debugging with a Debugger", function() {
 
         $string = Debugger::web_string( $object );
 
-        $this->expect( $string ) ->to() ->equal( 'a Debugger_Web_String_Spec\Sample (1) {<br>   p_1 => 1<br>   p_2 => 2<br>   p_3 => circular reference to object (1)<br>}' );
+        $this->expect( $string ) ->to() ->equal( 'a Debugger_Web_String_Spec\Sample (1) {<br>   p_1 => 1<br>   p_2 => 2<br>   p_3 => reference to object (1)<br>}' );
 
     });
 

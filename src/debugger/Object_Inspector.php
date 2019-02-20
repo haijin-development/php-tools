@@ -62,7 +62,7 @@ class Object_Inspector
 
             if( $i !== false ) {
                 $i += 1;
-                return "circular reference to object ($i)";
+                return "reference to object ($i)";
             }
 
             $this->already_inspected[] = $object;

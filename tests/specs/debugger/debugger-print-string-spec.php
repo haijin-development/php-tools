@@ -111,7 +111,7 @@ $spec->describe( "When debugging with a Debugger", function() {
 
     });
 
-    $this->it( "inspects an nested circular reference", function() {
+    $this->it( "inspects an nested reference", function() {
 
         $object = new Sample( 1, 2, 3 );
 
@@ -122,7 +122,7 @@ $spec->describe( "When debugging with a Debugger", function() {
         $this->expect( $string ) ->to() ->equal( 'a Debugger_Print_String_Spec\Sample (1) {
    p_1 => 1
    p_2 => 2
-   p_3 => circular reference to object (1)
+   p_3 => reference to object (1)
 }' );
 
     });
