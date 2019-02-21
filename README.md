@@ -272,7 +272,9 @@ $cache->locking_do( function($cache) use($filename) {
 <a name="c-2-8"></a>
 ## Debugger
 
-Instead of using `var_dump`, recursively inspect any value, array or object with the much more expressive and clear `\Haijin\Debugger`.
+Recursively inspect any value, array or object with `\Haijin\Debugger`.
+
+![Screenshot](documentation/Debugger-screenshot.png)
 
 For console and files logging:
 
@@ -284,6 +286,25 @@ For html logging:
 
 ```php
 echo \Haijin\Debugger::web_inspect( $object );
+```
+
+For abbreviation in the file `tests\specs_boot.php` define the function
+
+```php
+\Haijin\Specs\Specs_Runner::configure( function($specs) {
+
+});
+
+function inspect($object)
+{
+    \Haijin\Debugger::inspect( $object );
+}
+```
+
+and in the specs use
+
+```php
+\inspect( $files_cache );
 ```
 
 <a name="c-3"></a>

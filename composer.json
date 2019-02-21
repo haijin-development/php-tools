@@ -19,17 +19,8 @@
             "php": "7.1"
         }
     },
-    "repositories": {
-        "haijin/specs": {
-            "type": "path",
-            "url": "../php-specs",
-            "options": {
-            "symlink": true
-            }
-        }
-    },
     "require-dev": {
-        "haijin/specs": "dev-development"
+        "haijin/specs": "^1.1"
     },
     "autoload": {
         "psr-4": {
