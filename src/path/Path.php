@@ -248,7 +248,6 @@ abstract class Path
 
         return $this;
     }
-
     /**
      * Returns the common root between $this path and another one.
      */
@@ -270,6 +269,36 @@ abstract class Path
         }
 
         return $common_path;
+    }
+
+    /**
+     * Returns the difference between $this Path and another one.
+     */
+    public function difference_with($another_path)
+    {
+        $n = $another_path->length();
+
+        $another_path_array = $another_path->to_array();
+
+        $difference = $this->new_instance_with( [] );
+
+        $collecting = false;
+
+        foreach( $this->path as $i => $attribute ) {
+
+            if( ! $collecting 
+                &&
+                ( $i >= $n || $attribute != $another_path_array[$i] )
+              ) {
+                $collecting = true;
+            }
+
+            if( $collecting ) {
+                $difference->append( $attribute );
+            }
+        }
+
+        return $difference;
     }
 
     /// Comparing
