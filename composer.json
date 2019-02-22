@@ -1,5 +1,4 @@
 {
-    "minumum-stability": "dev",
     "name": "haijin/tools",
     "description": "Common tools to use in PHP applications.",
     "keywords": ["utilities", "path", "collections"],
