@@ -263,12 +263,13 @@ class Object_Attribute_Accessor
 
         $this->validate_attribute_existence($current_value, $key, $partial_path, $attribute_path);
 
-        if( is_array( $current_value ) )
+        if( is_array( $current_value ) ) {
             $current_value[ $key ] = $value;
-        else
+        } else {
             $current_value->$key = $value;
+        }
 
-        return $this;
+        return $this->object;
     }
 
     /**
