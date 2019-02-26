@@ -26,7 +26,7 @@ $spec->describe( "An Object_Attribute_Accessor", function() {
     $this->it( "gets an existing attribute or evaluates an absent closure", function() {
         $object = [
             "name" => "Lisa",
-            "last_name" => "Simpson",
+            "last_name" => null,
             "address" => [
                 "street" => "Evergreen 742"
             ]
@@ -45,6 +45,15 @@ $spec->describe( "An Object_Attribute_Accessor", function() {
         $this->expect(
 
             $accessor->get_value_at_if_absent( "address.number",  "Absent value" )
+
+        ) ->to() ->equal( "Absent value" );
+
+
+        $accessor = new Object_Attribute_Accessor( $object );
+
+        $this->expect(
+
+            $accessor->get_value_at_if_absent( "last_name",  "Absent value" )
 
         ) ->to() ->equal( "Absent value" );
 

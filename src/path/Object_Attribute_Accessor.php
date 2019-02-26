@@ -187,8 +187,12 @@ class Object_Attribute_Accessor
         });
     }
 
-    public function get_value_at_if_absent($attribute_path, $absent_value)
+    public function get_value_at_if_absent($attribute_path, $absent_value, $binding = null)
     {
+        if( $binding === null ) {
+            $binding = $this;
+        }
+
         if( ! is_a( $attribute_path, "Haijin\Attribute_Path" ) ) {
             $attribute_path = new Attribute_Path( $attribute_path );
         }
@@ -201,13 +205,20 @@ class Object_Attribute_Accessor
 
             $key = $this->get_key_from( $attribute );
 
-            if( $current_value === null || ! array_key_exists( $key, $current_value ) )
-                return ( $absent_value instanceof \Closure ) ? $absent_value->call( $this, $partial_path ) : $absent_value;
+            if( $current_value === null || ! array_key_exists( $key, $current_value ) ) {
+                return ( $absent_value instanceof \Closure ) ?
+                    $absent_value->call( $binding, $partial_path ) : $absent_value;
+            }
 
             if( is_array( $current_value ) )
                 $current_value =& $current_value[ $key ];
             else
                 $current_value =& $current_value->$key;
+        }
+
+        if( $current_value === null ) {
+            return ( $absent_value instanceof \Closure ) ?
+                $absent_value->call( $binding, $partial_path ) : $absent_value;
         }
 
         return $current_value;

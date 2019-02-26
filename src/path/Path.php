@@ -281,6 +281,7 @@ abstract class Path
         $another_path_array = $another_path->to_array();
 
         $difference = $this->new_instance_with( [] );
+        $difference->be_relative();
 
         $collecting = false;
 
