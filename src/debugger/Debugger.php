@@ -4,28 +4,35 @@ namespace Haijin;
 
 class Debugger
 {
-    static public function inspect($object)
+    static public function inspect($object, $indentationLength = null)
     {
-        echo "\n" . self::print_string( $object );
+        echo "\n" . self::printString($object, $indentationLength);
     }
 
-    static public function web_inspect($object)
+    static public function printString($object, $indentationLength = null)
     {
-        echo "<br>" . self::web_string( $object );
+        return self::newObjectInspectorOn($object, $indentationLength)
+            ->printString();
     }
 
-    static public function print_string($object)
+    static public function newObjectInspectorOn($object)
     {
-        return self::new_object_inspector_on( $object )->print_string();
+        return new ObjectInspector($object);
     }
 
-    static public function web_string($object)
+    static public function webInspect($object, $indentationLength = null)
     {
-        return self::new_object_inspector_on( $object )->web_string();
+        echo "<br>" . self::webString($object, $indentationLength);
     }
 
-    static public function new_object_inspector_on($object)
+    static public function webString($object, $indentationLength = null)
     {
-        return new Object_Inspector( $object );
+        return self::newObjectInspectorOn($object, $indentationLength)
+            ->webString();
+    }
+
+    static public function objectTypeString($object)
+    {
+        return self::newObjectInspectorOn($object)->objectTypeString($object);
     }
 }

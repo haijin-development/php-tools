@@ -1,4 +1,4 @@
-# Ordered_Collection
+# OrderedCollection
 
 An alternative to using PHP arrays for indexed collections.
 
@@ -26,15 +26,15 @@ It is always passed by reference and has a consistent, simple and complete proto
 ### Creating instances
 ```php
 /**
- * Creates and returns a new Ordered_Collection with an item in it.
+ * Creates and returns a new OrderedCollection with an item in it.
  *
  * Example
  *
- *      $ordered_collection = Ordered_Collection::with( 123 );
+ *      $orderedCollection = OrderedCollection::with( 123 );
  *
  * @param object $item An item to add to the created collection.
  *
- * @return Ordered_Collection The Ordered_Collection with the item in it.
+ * @return OrderedCollection The OrderedCollection with the item in it.
  */
 public function with($item);
 ```
@@ -42,17 +42,17 @@ public function with($item);
 
 ```php
 /**
- * Creates and returns a new Ordered_Collection with all the items in it.
+ * Creates and returns a new OrderedCollection with all the items in it.
  *
  * Example
  *
- *      $ordered_collection = Ordered_Collection::with_all( [ 1, 2, 3 ] );
+ *      $orderedCollection = OrderedCollection::withAll( [ 1, 2, 3 ] );
  *
- * @param array|Ordered_Collection $items The items to add to the created collection.
+ * @param array|OrderedCollection $items The items to add to the created collection.
  *
- * @return Ordered_Collection The Ordered_Collection with the items in it.
+ * @return OrderedCollection The OrderedCollection with the items in it.
  */
-public function with_all($items);
+public function withAll($items);
 ```
 
 
@@ -63,7 +63,7 @@ public function with_all($items);
 /**
  * Initializes $this object with an optional array of items in it.
  *
- * @param array|Ordered_Collection $items Optional - An array or Ordered_Collection with items to add to $this Ordered_Collection.
+ * @param array|OrderedCollection $items Optional - An array or OrderedCollection with items to add to $this OrderedCollection.
  */
 public function __construct($items = []);
 ```
@@ -77,11 +77,11 @@ public function __construct($items = []);
  *
  *  Example
  *
- *      $ordered_collection->is_empty(); // => true or false
+ *      $orderedCollection->isEmpty(); // => true or false
  *
  * @return bool Returns true if $this collection is empty, false otherwise.
  */
-public function is_empty();
+public function isEmpty();
 ```
 
 
@@ -91,11 +91,11 @@ public function is_empty();
  *
  *  Example
  *
- *      $ordered_collection->not_empty(); // => true or false
+ *      $orderedCollection->notEmpty(); // => true or false
  *
  * @return bool Returns true if $this collection is not empty, false otherwise.
  */
-public function not_empty();
+public function notEmpty();
 ```
 
 <a name="c-2-2" ></a>
@@ -107,11 +107,11 @@ public function not_empty();
  *
  *  Example
  *
- *      $ordered_collection->add( 123 );
+ *      $orderedCollection->add( 123 );
  *
  * @param object $item The item to append to the collection.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
 public function add($item);
 ```
@@ -123,13 +123,13 @@ public function add($item);
  *
  *  Example
  *
- *      $ordered_collection->add_all( [ 1, 2, 3 ] );
+ *      $orderedCollection->addAll( [ 1, 2, 3 ] );
  *
- * @param array|Ordered_Collection $items The items to append to the collection.
+ * @param array|OrderedCollection $items The items to append to the collection.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
-public function add_all($items);
+public function addAll($items);
 ```
 
 
@@ -139,15 +139,15 @@ public function add_all($items);
  *
  *  Example
  *
- *      $ordered_collection->add_at( 'new item', 0 );
- *      $ordered_collection->add_at( 'new item', -1 );
+ *      $orderedCollection->addAt( 'new item', 0 );
+ *      $orderedCollection->addAt( 'new item', -1 );
  *
  * @param object $item The item to add.
  * @param int $index The position to add the item.
  *
- * @return Ordered_Collection Returns $this object.
+ * @return OrderedCollection Returns $this object.
  */
-public function add_at($item, $index);
+public function addAt($item, $index);
 ```
 
 
@@ -157,15 +157,15 @@ public function add_at($item, $index);
  *
  *  Example
  *
- *      $ordered_collection->add_all_at( [ 'new item', 'another new item' ], 0 );
- *      $ordered_collection->add_all_at( [ 'new item', 'another new item' ], -1 );
+ *      $orderedCollection->addAllAt( [ 'new item', 'another new item' ], 0 );
+ *      $orderedCollection->addAllAt( [ 'new item', 'another new item' ], -1 );
  *
  * @param array $items The items to add.
  * @param int $index The position to add the items.
  *
- * @return Ordered_Collection Returns $this object.
+ * @return OrderedCollection Returns $this object.
  */
-public function add_all_at($items, $index);
+public function addAllAt($items, $index);
 ```
 
 <a name="c-2-3" ></a>
@@ -177,7 +177,7 @@ public function add_all_at($items, $index);
  *
  *  Example
  *
- *      $item = $ordered_collection->first();
+ *      $item = $orderedCollection->first();
  *
  * @return object The item at the first position.
  */
@@ -190,7 +190,7 @@ public function first();
  *
  *  Example
  *
- *      $item = $ordered_collection->last();
+ *      $item = $orderedCollection->last();
  *
  * @return object The item at the last position.
  */
@@ -203,8 +203,8 @@ public function last();
  *
  *  Example
  *
- *      $item = $ordered_collection->at( 0 );
- *      $item = $ordered_collection->at( -1 );
+ *      $item = $orderedCollection->at( 0 );
+ *      $item = $orderedCollection->at( -1 );
  *
  * @param int $index The position to look for.
  *
@@ -219,8 +219,8 @@ public function at($index);
  *
  *  Example
  *
- *      $item = $ordered_collection[ 0 ];
- *      $item = $ordered_collection[ -1 ];
+ *      $item = $orderedCollection[ 0 ];
+ *      $item = $orderedCollection[ -1 ];
  *
  * @param int $index The position to look for.
  *
@@ -231,21 +231,20 @@ public function []($index);
 
 ```php
 /**
- * Returns the item at the $index position. If there is no item at that position, evaluates the $absent_closure.
+ * Returns the item at the $index position. If there is no item at that position, evaluates the $absentCallable.
  *
  *  Example
  *
- *      $item = $ordered_collection->at_if_absent( 3, function(){
+ *      $item = $orderedCollection->atIfAbsent( 3, function(){
  *          return "A default item";
  *      });
  *
  * @param int $index The position to look for.
- * @param closure $absent_closure The closure to evaluate if there is no item at $index.
- * @param object $binding Optional - An optional binding for the evaluation of the $absent_closure.
+ * @param callable $absentCallable The callable to evaluate if there is no item at $index.
  *
- * @return object The item at the given position or the result of evaluating the $absent_closure.
+ * @return object The item at the given position or the result of evaluating the $absentCallable.
  */
-public function at_if_absent($index, $absent_closure, $binding = null);
+public function atIfAbsent($index, $absentCallable);
 ```
 
 
@@ -255,15 +254,15 @@ public function at_if_absent($index, $absent_closure, $binding = null);
  *
  *  Example
  *
- *      $ordered_collection->at_put( 0, 'replace item' );
- *      $ordered_collection->at_put( -1, 'replace item' );
+ *      $orderedCollection->atPut( 0, 'replace item' );
+ *      $orderedCollection->atPut( -1, 'replace item' );
  *
  * @param int $index The position to put the element.
  * @param object $item The item to put in the given $index position.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
-public function at_put($index, $item);
+public function atPut($index, $item);
 ```
 
 <a name="c-2-4" ></a>
@@ -275,11 +274,11 @@ public function at_put($index, $item);
  *
  *  Example
  *
- *      $item = $ordered_collection->remove_first();
+ *      $item = $orderedCollection->removeFirst();
  *
  * @return object The last item removed.
  */
-public function remove_first();
+public function removeFirst();
 ```
 
 ```php
@@ -288,11 +287,11 @@ public function remove_first();
  *
  *  Example
  *
- *      $item = $ordered_collection->remove_last();
+ *      $item = $orderedCollection->removeLast();
  *
  * @return object The last item removed.
  */
-public function remove_last();
+public function removeLast();
 ```
 
 
@@ -303,33 +302,32 @@ public function remove_last();
  *
  *  Example
  *
- *      $item = $ordered_collection->remove_at( 0 );
+ *      $item = $orderedCollection->removeAt( 0 );
  *
  * @param int $index The index of the item to remove.
  *
  * @return object The item removed.
  */
-public function remove_at($index);
+public function removeAt($index);
 ```
 
 
 ```php
 /**
- * Removes the item at an indexed position. If the index is out of rante evaluates the $absent_closure.
+ * Removes the item at an indexed position. If the index is out of rante evaluates the $absentCallable.
  *
  *  Example
  *
- *      $item = $ordered_collection->remove_at( 0, function() {
+ *      $item = $orderedCollection->removeAt( 0, function() {
  *          return "absent value";
  *      });
  *
  * @param int $index The index of the item to remove.
- * @param closure $absent_closure A closure to evaluate if the $index is out of range.
- * @param object $binding An optional binding to evaluate the absent_closure.
+ * @param callable $absentCallable A callable to evaluate if the $index is out of range.
  *
  * @return object The item removed.
  */
-public function remove_at_if_absent($index, $absent_closure, $binding = null);
+public function removeAtIfAbsent($index, $absentCallable);
 ```
 
 ```php
@@ -338,7 +336,7 @@ public function remove_at_if_absent($index, $absent_closure, $binding = null);
  *
  *  Example
  *
- *      $item = $ordered_collection->remove( $object );
+ *      $item = $orderedCollection->remove( $object );
  *
  * @return object Returns $this collection.
  */
@@ -362,269 +360,256 @@ public function size();
 
 ```php
 /**
- * Finds and returns the first item that makes the closure evaluate to true.
+ * Finds and returns the first item that makes the callable evaluate to true.
  * Raises an error if no item is found.
  *
  *  Example
  *
- *      $first_item_found = $ordered_collection->find_first( function($each) {
- *          return $each->is_active();
- *      }, $this);
+ *      $firstItemFound = $orderedCollection->findFirst( function($each) {
+ *          return $each->isActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
  *
- * @return object The first item that makes the closure return true.
+ * @return object The first item that makes the callable return true.
  */
-public function find_first($closure, $binding = null);
+public function findFirst($callable);
 ```
 
 
 ```php
 /**
- * Finds and returns the first item that makes the closure evaluate to true. If no item is found
- * evaluates and returns an absent_closure.
+ * Finds and returns the first item that makes the callable evaluate to true. If no item is found
+ * evaluates and returns an absentCallable.
  *
  *  Example
  *
- *      $first_item_found = $ordered_collection->find_first_if_absent(
- *          function($each) { return $each->is_active(); },
+ *      $firstItemFound = $orderedCollection->findFirstIfAbsent(
+ *          function($each) { return $each->isActive(); },
  *          function() { return "default value"; },
  *          $this
  *      );
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param callable $absent_closure A closure that is evaluated if no item is found.
- * @param object $binding An optional binding for the closures.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
+ * @param callable $absentCallable A callable that is evaluated if no item is found.
  *
- * @return object The first item that makes the closure return true, or the result of evaluating the absent_closure..
+ * @return object The first item that makes the callable return true, or the result of evaluating the absentCallable..
  */
-public function find_first_if_absent($closure, $absent_closure, $binding = null);
+public function findFirstIfAbsent($callable, $absentCallable);
 ```
 
 
 ```php
 /**
- * Finds and returns the index of the first item that makes the closure evaluate to true.
+ * Finds and returns the index of the first item that makes the callable evaluate to true.
  * Returns -1 if no item is found.
  *
  *  Example
  *
- *      $index = $ordered_collection->find_first_index( function($each) {
- *          return $each->is_active();
- *      }, $this);
+ *      $index = $orderedCollection->findFirstIndex( function($each) {
+ *          return $each->isActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
  *
- * @return int The index of the first item that makes the closure return true, or -1 if no item is found.
+ * @return int The index of the first item that makes the callable return true, or -1 if no item is found.
  */
-public function find_first_index($closure, $binding = null);
+public function findFirstIndex($callable);
 ```
 
 
 ```php
 /**
- * Finds and returns the last item that makes the closure evaluate to true.
+ * Finds and returns the last item that makes the callable evaluate to true.
  * Raises an error if no item is found.
  *
  *  Example
  *
- *      $last_item_found = $ordered_collection->find_last( function($each) {
- *          return $each->is_active();
- *      }, $this);
+ *      $lastItemFound = $orderedCollection->findLast( function($each) {
+ *          return $each->isActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
  *
- * @return object The last item that makes the closure return true.
+ * @return object The last item that makes the callable return true.
  */
-public function find_last($closure, $binding = null);
+public function findLast($callable);
 ```
 
 
 ```php
 /**
- * Finds and returns the last item that makes the closure evaluate to true. If none is found evaluates
- * and returns the absent_closure.
+ * Finds and returns the last item that makes the callable evaluate to true. If none is found evaluates
+ * and returns the absentCallable.
  *
  *  Example
  *
- *      $last_item_found = $ordered_collection->find_last_if_absent(
- *              function($each) { return $each->is_active(); },
+ *      $lastItemFound = $orderedCollection->findLastIfAbsent(
+ *              function($each) { return $each->isActive(); },
  *              function() { return "default value"; },
  *              $this
  *          );
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param callable $absent_closure A closure that is evaluated if no item is found.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
+ * @param callable $absentCallable A callable that is evaluated if no item is found.
  *
- * @return object The last item that makes the closure return true, or the result of evaluating the absent_closure..
+ * @return object The last item that makes the callable return true, or the result of evaluating the absentCallable..
  */
-public function find_last_if_absent($closure, $absent_closure, $binding = null);
+public function findLastIfAbsent($callable, $absentCallable);
 ```
 
 
 ```php
 /**
- * Finds and returns the index of the last item that makes the closure evaluate to true.
+ * Finds and returns the index of the last item that makes the callable evaluate to true.
  * Returns -1 if no item is found.
  *
  *  Example
  *
- *      $index = $ordered_collection->find_last_index( function($each) {
- *          return $each->is_active();
- *      }, $this);
+ *      $index = $orderedCollection->findLastIndex( function($each) {
+ *          return $each->isActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item and returns true or false.
  *
- * @return int The index of the last item that makes the closure return true, or -1 if no item is found.
+ * @return int The index of the last item that makes the callable return true, or -1 if no item is found.
  */
-public function find_last_index($closure, $binding = null);
+public function findLastIndex($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item in the collection.
+ * Evaluates a callable on each item in the collection.
  * Returns $this object.
  *
  *  Example
  *
- *      $ordered_collection->each_do( function($each) {
+ *      $orderedCollection->eachDo( function($each) {
  *          print $each;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
-public function each_do($closure, $binding = null);
+public function eachDo($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item and index in the collection.
+ * Evaluates a callable on each item and index in the collection.
  * Returns $this object.
  *
  *  Example
  *
- *      $ordered_collection->each_with_index_do( function($each, $index) {
+ *      $orderedCollection->eachWithIndexDo( function($each, $index) {
  *          print $each;
  *          print $index;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
-public function each_with_index_do($closure, $binding = null);
+public function eachWithIndexDo($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item in the collection from its end to its beginning.
+ * Evaluates a callable on each item in the collection from its end to its beginning.
  * Returns $this object.
  *
  *  Example
  *
- *      $ordered_collection->reverse_do( function($each) {
+ *      $orderedCollection->reverseDo( function($each) {
  *          print $each;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection.
  *
- * @return Ordered_Collection Returns $this collection.
+ * @return OrderedCollection Returns $this collection.
  */
-public function reverse_do($closure, $binding = null);
+public function reverseDo($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with only
- * those items that makes the closure evaluate to true.
+ * Evaluates a callable on each item in the collection and returns a new OrderedCollection with only
+ * those items that makes the callable evaluate to true.
  *
  *  Example
  *
- *      $selected_items = $ordered_collection->select( function($each) {
- *          return $each->is_active();
- *      }, $this);
+ *      $selectedItems = $orderedCollection->select( function($each) {
+ *          return $each->isActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection and returns true or false.
  *
- * @return Ordered_Collection A new Ordered_Collection with the items that makes the closure evaluate to true.
+ * @return OrderedCollection A new OrderedCollection with the items that makes the callable evaluate to true.
  */
-public function select($closure, $binding = null);
+public function select($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with only
- * those items that makes the closure evaluate to false.
+ * Evaluates a callable on each item in the collection and returns a new OrderedCollection with only
+ * those items that makes the callable evaluate to false.
  *
  *  Example
  *
- *      $selected_items = $ordered_collection->reject( function($each) {
- *          return $each->not_active();
- *      }, $this);
+ *      $selectedItems = $orderedCollection->reject( function($each) {
+ *          return $each->notActive();
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection and returns true or false.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection and returns true or false.
  *
- * @return Ordered_Collection A new Ordered_Collection with the items that makes the closure evaluate to false.
+ * @return OrderedCollection A new OrderedCollection with the items that makes the callable evaluate to false.
  */
-public function reject($closure, $binding = null);
+public function reject($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each item in the collection and returns a new Ordered_Collection with the results
+ * Evaluates a callable on each item in the collection and returns a new OrderedCollection with the results
  * collected on each evaluation.
  *
  *  Example
  *
- *      $selected_items = $ordered_collection->collect( function($n) {
+ *      $selectedItems = $orderedCollection->collect( function($n) {
  *          return $n * 2;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each item in the collection and returns something.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each item in the collection and returns something.
  *
- * @return Ordered_Collection A new Ordered_Collection with the items collected from the closure evaluation on each item.
+ * @return OrderedCollection A new OrderedCollection with the items collected from the callable evaluation on each item.
  */
-public function collect($closure, $binding = null);
+public function collect($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on an accumulator and on each item in the collection. Returns the value of the accumualted
+ * Evaluates a callable on an accumulator and on each item in the collection. Returns the value of the accumualted
  * variable.
  *
  *  Example
  *
- *      $sum = $ordered_collection->collect( 0, function($sum, $n) {
+ *      $sum = $orderedCollection->collect( 0, function($sum, $n) {
  *          return $sum = $sum + $n;
- *      }, $this);
+ *      });
  *
  * @param object $acummulator The initial value of the acummulator.
- * @param callable $closure A closure that is evaluated on the accumulator and each item in the collection.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on the accumulator and each item in the collection.
  *
  * @return object The acummulated value.
  */
-public function acummulate($acummulator, $closure, $binding = null);
+public function acummulate($acummulator, $callable);
 ```
 
 <a name="c-2-7" ></a>
@@ -637,7 +622,7 @@ public function acummulate($acummulator, $closure, $binding = null);
  *
  * @return array Returns an array with the items in $this collection.
  */
-public function to_array();
+public function toArray();
 ```
 
 
@@ -647,5 +632,5 @@ public function to_array();
  *
  * @return string A string representation of $this collection.
  */
-public function to_string();
+public function toString();
 ```

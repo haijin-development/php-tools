@@ -46,13 +46,13 @@ public function with($key, $value);
  *
  * Example
  *
- *      $dictionary = Dictionary::with_all( [ 'a' => 1, 'b' => 2, 'c' => 3 ] );
+ *      $dictionary = Dictionary::withAll( [ 'a' => 1, 'b' => 2, 'c' => 3 ] );
  *
  * @param array|Dictionary $associations The associations to add to the created dictionary.
  *
  * @return Dictionary The Dictionary with the associations in it.
  */
-public function with_all($associations);
+public function withAll($associations);
 ```
 
 <a name="c-2"></a>
@@ -76,11 +76,11 @@ public function __construct($associations = []);
  *
  *  Example
  *
- *      $dictionary->is_empty(); // => true or false
+ *      $dictionary->isEmpty(); // => true or false
  *
  * @return bool Returns true if $this dictionary is empty, false otherwise.
  */
-public function is_empty();
+public function isEmpty();
 ```
 
 
@@ -90,11 +90,11 @@ public function is_empty();
  *
  *  Example
  *
- *      $dictionary->not_empty(); // => true or false
+ *      $dictionary->notEmpty(); // => true or false
  *
  * @return bool Returns true if $this dictionary is not empty, false otherwise.
  */
-public function not_empty();
+public function notEmpty();
 ```
 
 
@@ -104,7 +104,7 @@ public function not_empty();
  *
  * @return bool Returns true if $this dictionary has a key defined, false if not.
  */
-public function has_key($key);
+public function hasKey($key);
 ```
 
 
@@ -115,7 +115,7 @@ public function has_key($key);
  *
  * @return bool Returns true if $this dictionary has not a key defined, false if not.
  */
-public function no_key($key);
+public function noKey($key);
 ```
 
 
@@ -128,11 +128,11 @@ public function no_key($key);
  *
  *  Example
  *
- *      $item = $dictionary->get_keys();
+ *      $item = $dictionary->getKeys();
  *
  * @return array An array with the keys of this dictionary.
  */
-public function get_keys();
+public function getKeys();
 ```
 
 
@@ -142,11 +142,11 @@ public function get_keys();
  *
  *  Example
  *
- *      $item = $dictionary->get_values();
+ *      $item = $dictionary->getValues();
  *
  * @return array An array with the values of this dictionary.
  */
-public function get_values();
+public function getValues();
 ```
 
 
@@ -182,21 +182,20 @@ public function []($key);
 
 ```php
 /**
- * Returns the value at the $key. If the key not defined, evaluates the $absent_closure.
+ * Returns the value at the $key. If the key not defined, evaluates the $absentCallable.
  *
  *  Example
  *
- *      $value = $dictionary->at_if_absent( 'a', function(){
+ *      $value = $dictionary->atIfAbsent( 'a', function(){
  *          return "A default value";
  *      });
  *
  * @param object $key The key to look for.
- * @param closure $absent_closure The closure to evaluate if the key is not defined.
- * @param object $binding Optional - An optional binding for the evaluation of the $absent_closure.
+ * @param callable $absentCallable The callable to evaluate if the key is not defined.
  *
- * @return object The item at the given position or the result of evaluating the $absent_closure.
+ * @return object The item at the given position or the result of evaluating the $absentCallable.
  */
-public function at_if_absent($key, $absent_closure, $binding = null);
+public function atIfAbsent($key, $absentCallable);
 ```
 
 
@@ -207,14 +206,14 @@ public function at_if_absent($key, $absent_closure, $binding = null);
  *
  *  Example
  *
- *      $dictionary->at_put( 'key', 123 );
+ *      $dictionary->atPut( 'key', 123 );
  *
  * @param object $key The key to associate the value with.
  * @param object $value The value to put in the given $key.
  *
  * @return Dictionary Returns $this dictionary.
  */
-public function at_put($key, $value);
+public function atPut($key, $value);
 ```
 
 
@@ -224,14 +223,14 @@ public function at_put($key, $value);
  *
  *  Example
  *
- *      $dictionary->merge_with( [ 'key', 123 ] );
- *      $dictionary->merge_with( $another_dictionary );
+ *      $dictionary->mergeWith( [ 'key', 123 ] );
+ *      $dictionary->mergeWith( $anotherDictionary );
  *
  * @param array|Dictionary $dictionary The associations to merge into $this dictionary.
  *
  * @return Dictionary Returns $this dictionary.
  */
-public function merge_with($associations);
+public function mergeWith($associations);
 ```
 
 <a name="c-2-3"></a>
@@ -243,35 +242,32 @@ public function merge_with($associations);
  *
  *  Example
  *
- *      $value = $ordered_collection->remove_at( 'a' );
+ *      $value = $orderedCollection->removeAt( 'a' );
  *
  * @param object $key The key of the association to remove.
  *
  * @return object The value of the association removed.
  */
-public function remove_at($key);
+public function removeAt($key);
 ```
 
 
 
 ```php
 /**
- * Removes the association at a key. If the key is not defined evaluates the absent closure.
+ * Removes the association at a key. If the key is not defined evaluates the
+ * absent callable.
  *
  *  Example
  *
- *      $value = $ordered_collection->remove_at( 'a', function() {
+ *      $value = $orderedCollection->removeAt( 'a', function() {
  *          return "absent value";
  *      });
  *
  * @param object $key The key of the association to remove.
- * @param callable $absent_closure A closure to evaluate of the key to remove is not defined.
- * @param object $binding An optional object to bind to the absent_closure.
- *
- * @return object The value of the association removed, or if the key is not defined the result of evaluating
- *      the absent closure.
+ * @param callable $absentCallable A callable to evaluate of the key to remove is not defined.
  */
-public function remove_at_if_absent($key, $absent_closure, $binding = null);
+public function removeAtIfAbsent($key, $absentCallable);
 ```
 
 <a name="c-2-4"></a>
@@ -291,62 +287,59 @@ public function size();
 
 ```php
 /**
- * Evaluates a closure on each (key, value) association in $this dictionary.
+ * Evaluates a callable on each (key, value) association in $this dictionary.
  * Returns $this object.
  *
  *  Example
  *
- *      $dictionary->keys_and_values_do( function($key, $value) {
+ *      $dictionary->keysAndValuesDo( function($key, $value) {
  *          print $key;
  *          print $value;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each key and value pair in the dictionary.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each key and value pair in the dictionary.
  *
  * @return Dictionary Returns $this dictionary.
  */
-public function keys_and_values_do($closure, $binding = null);
+public function keysAndValuesDo($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each key in $this dictionary.
+ * Evaluates a callable on each key in $this dictionary.
  * Returns $this object.
  *
  *  Example
  *
- *      $dictionary->keys_do( function($key) {
+ *      $dictionary->keysDo( function($key) {
  *          print $key;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each key in $this dictionary.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each key in $this dictionary.
  *
  * @return Dictionary Returns $this dictionary.
  */
-public function keys_do($closure, $binding = null);
+public function keysDo($callable);
 ```
 
 
 ```php
 /**
- * Evaluates a closure on each value in $this dictionary.
+ * Evaluates a callable on each value in $this dictionary.
  * Returns $this object.
  *
  *  Example
  *
- *      $dictionary->values_do( function($value) {
+ *      $dictionary->valuesDo( function($value) {
  *          print $value;
- *      }, $this);
+ *      });
  *
- * @param callable $closure A closure that is evaluated on each value in $this dictionary.
- * @param object $binding An optional binding for the closure.
+ * @param callable $callable A callable that is evaluated on each value in $this dictionary.
  *
  * @return Dictionary Returns $this dictionary.
  */
-public function values_do($closure, $binding = null);
+public function valuesDo($callable);
 ```
 
 <a name="c-2-6"></a>
@@ -359,7 +352,7 @@ public function values_do($closure, $binding = null);
  *
  * @return array Returns an array with the items in $this Dictionary.
  */
-public function to_array();
+public function toArray();
 ```
 
 
@@ -369,5 +362,5 @@ public function to_array();
  *
  * @return string A string representation of $this collection.
  */
-public function to_string();
+public function toString();
 ```

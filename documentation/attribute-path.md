@@ -1,10 +1,10 @@
 # Path classes
 
-A set of classes to model paths of things. Currently there is just an `Attribute_Path` class.
+A set of classes to model paths of things. Currently there is just an `AttributePath` class.
 
 ## Table of contents
 
-1. [Attribute_Path](#c-1)
+1. [AttributePath](#c-1)
 2. [Examples](#c-2)
     1. [Creating paths](#c-2-1)
     2. [Concatenating paths](#c-2-2)
@@ -12,19 +12,19 @@ A set of classes to model paths of things. Currently there is just an `Attribute
     4. [Appending paths](#c-2-4)
     5. [Dropping path tails](#c-2-5)
     6. [Accessing a nested attribute value](#c-2-6)
-3. [File_Path](#c-3)
+3. [FilePath](#c-3)
     1. [Creating paths](#c-3-1)
     2. [Concatenating paths](#c-3-2)
     3. [Moving the path back](#c-3-3)
     4. [Appending paths](#c-3-4)
     5. [Dropping path tails](#c-3-5)
     6. [Absolute paths](#c-3-6)
-    7. [File_Path file operations](#c-3-7)
+    7. [FilePath file operations](#c-3-7)
 
 
 
 <a name="c-1"></a>
-## Attribute_Path
+## AttributePath
 
 An attribute path is a sequence of attributes from a root object to a nested attribute of that object.
 
@@ -33,7 +33,7 @@ For instance in the following object
 ```php
 $user = [
     'name' => 'Lisa',
-    'last_name' => 'Simpson',
+    'lastName' => 'Simpson',
     'address' => [
         'street' => 'Evergreen 742'
     ]
@@ -57,71 +57,71 @@ This class provides a common interface and a simple way to deal with attribute p
 ### Creating paths
 
 ```php
-use Haijin\Attribute_Path;
+use Haijin\AttributePath;
 
 // Creates an empty path.
-$path = new Attribute_Path();
+$path = new AttributePath();
 
 // Creates a path from an attributes chain string.
-$path = new Attribute_Path( 'user.address.street' );
+$path = new AttributePath( 'user.address.street' );
 
 // Creates a path from an attributes chain array.
-$path = new Attribute_Path( ['user', 'address', 'street'] );
+$path = new AttributePath( ['user', 'address', 'street'] );
 
 // Creates a path from another path.
-$path = new Attribute_Path( new Attribute_Path( 'user.address.street' ) );
+$path = new AttributePath( new AttributePath( 'user.address.street' ) );
 ```
 
 <a name="c-2-2"></a>
 ### Concatenating paths
 
 ```php
-use Haijin\Attribute_Path;
+use Haijin\AttributePath;
 
 // Concatenates two paths into a new one.
-$path = new Attribute_Path( 'user' );
-$new_path = $path->concat( new Attribute_Path( 'address.street' ) );
+$path = new AttributePath( 'user' );
+$newPath = $path->concat( new AttributePath( 'address.street' ) );
 
-// Concatenates a string into a new Attribute_Path.
-$path = new Attribute_Path( 'user' );
-$new_path = $path->concat( 'address.street' );
+// Concatenates a string into a new AttributePath.
+$path = new AttributePath( 'user' );
+$newPath = $path->concat( 'address.street' );
 
-// Concatenates an array of attributes into a new Attribute_Path.
-$path = new Attribute_Path( 'user' );
-$new_path = $path->concat( ['address.street'] );
+// Concatenates an array of attributes into a new AttributePath.
+$path = new AttributePath( 'user' );
+$newPath = $path->concat( ['address.street'] );
 ```
 
 <a name="c-2-3"></a>
 ### Moving the path back
 
 ```php
-use Haijin\Attribute_Path;
+use Haijin\AttributePath;
 
 // Removes the last attribute from the path into a new path.
-$path = new Attribute_Path( 'user.address.street' );
-$new_path = $path->back();
+$path = new AttributePath( 'user.address.street' );
+$newPath = $path->back();
 
 // Removes the last n attributes from the path into a new path.
-$path = new Attribute_Path( 'user.address.street' );
-$new_path = $path->back( 2 );
+$path = new AttributePath( 'user.address.street' );
+$newPath = $path->back( 2 );
 ```
 
 <a name="c-2-4"></a>
 ### Appending paths
 
 ```php
-use Haijin\Attribute_Path;
+use Haijin\AttributePath;
 
 // Appends another Path to a path.
-$path = new Attribute_Path( 'user' );
-$path->append( new Attribute_Path( 'address.street' ) );
+$path = new AttributePath( 'user' );
+$path->append( new AttributePath( 'address.street' ) );
 
 // Appends an attributes string to a path.
-$path = new Attribute_Path( 'user' );
+$path = new AttributePath( 'user' );
 $path->append( 'address.street' );
 
 // Appends an attributes array to a path.
-$path = new Attribute_Path( 'user' );
+$path = new AttributePath( 'user' );
 $path->append( ['address.street'] );
 ```
 
@@ -129,14 +129,14 @@ $path->append( ['address.street'] );
 ### Dropping path tails
 
 ```php
-use Haijin\Attribute_Path;
+use Haijin\AttributePath;
 
 // Drops the last attribute from the path.
-$path = new Attribute_Path( 'user.address.street' );
+$path = new AttributePath( 'user.address.street' );
 $path->drop();
 
 // Drops the last n attributes from the path.
-$path = new Attribute_Path( 'user.address.street' );
+$path = new AttributePath( 'user.address.street' );
 $path->drop( 2 );
 ```
 
@@ -147,42 +147,42 @@ $path->drop( 2 );
 // Reads an attribute from an associative array
 $user = [
     'name' => 'Lisa',
-    'last_name' => 'Simpson',
+    'lastName' => 'Simpson',
     'address' => [
         'street' => 'Evergreen 742'
     ]
 ];
-$path = new Attribute_Path( 'address.street' );
-$value = $path->get_value_from( $user );
+$path = new AttributePath( 'address.street' );
+$value = $path->getValueFrom( $user );
 
 // Writes an attribute to an associative array
 $user = [
     'name' => 'Lisa',
-    'last_name' => 'Simpson',
+    'lastName' => 'Simpson',
     'address' => [
         'street' => 'Evergreen 742'
     ]
 ];
-$path = new Attribute_Path( 'address.street' );
-$value = $path->set_value_to( $user, 123 );
+$path = new AttributePath( 'address.street' );
+$value = $path->setValueTo( $user, 123 );
 
 // Reads an attribute from an indexed array
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$path = new Attribute_Path( '[1].[0]' );
-$value = $path->get_value_from( $user );
+$path = new AttributePath( '[1].[0]' );
+$value = $path->getValueFrom( $user );
 
 // Writes an attribute to an indexed array
 $user = [ ['Lisa', 'Simpson'], [ 'Evergreen', '742' ] ];
 
-$path = new Attribute_Path( '[1].[0]' );
-$value = $path->set_value_to( $user, 123 );
+$path = new AttributePath( '[1].[0]' );
+$value = $path->setValueTo( $user, 123 );
 ```
 
 <a name="c-3"></a>
-## File_Path
+## FilePath
 
-A path to a file or folder.
+A path to a file or directory.
 
 <a name="c-2"></a>
 ## Examples
@@ -193,71 +193,71 @@ A path to a file or folder.
 ### Creating paths
 
 ```php
-use Haijin\File_Path;
+use Haijin\FilePath;
 
 // Creates an empty path.
-$path = new File_Path();
+$path = new FilePath();
 
 // Creates a path from an attributes chain string.
-$path = new File_Path( 'user/address/street' );
+$path = new FilePath( 'user/address/street' );
 
 // Creates a path from an attributes chain array.
-$path = new File_Path( ['user', 'address', 'street'] );
+$path = new FilePath( ['user', 'address', 'street'] );
 
 // Creates a path from another path.
-$path = new File_Path( new File_Path( 'user/address/street' ) );
+$path = new FilePath( new FilePath( 'user/address/street' ) );
 ```
 
 <a name="c-2-2"></a>
 ### Concatenating paths
 
 ```php
-use Haijin\File_Path;
+use Haijin\FilePath;
 
 // Concatenates two paths into a new one.
-$path = new File_Path( 'user' );
-$new_path = $path->concat( new File_Path( 'address/street' ) );
+$path = new FilePath( 'user' );
+$newPath = $path->concat( new FilePath( 'address/street' ) );
 
-// Concatenates a string into a new File_Path.
-$path = new File_Path( 'user' );
-$new_path = $path->concat( 'address/street' );
+// Concatenates a string into a new FilePath.
+$path = new FilePath( 'user' );
+$newPath = $path->concat( 'address/street' );
 
-// Concatenates an array of attributes into a new File_Path.
-$path = new File_Path( 'user' );
-$new_path = $path->concat( ['address/street'] );
+// Concatenates an array of attributes into a new FilePath.
+$path = new FilePath( 'user' );
+$newPath = $path->concat( ['address/street'] );
 ```
 
 <a name="c-2-3"></a>
 ### Moving the path back
 
 ```php
-use Haijin\File_Path;
+use Haijin\FilePath;
 
 // Removes the last attribute from the path into a new path.
-$path = new File_Path( 'user/address/street' );
-$new_path = $path->back();
+$path = new FilePath( 'user/address/street' );
+$newPath = $path->back();
 
 // Removes the last n attributes from the path into a new path.
-$path = new File_Path( 'user/address/street' );
-$new_path = $path->back( 2 );
+$path = new FilePath( 'user/address/street' );
+$newPath = $path->back( 2 );
 ```
 
 <a name="c-2-4"></a>
 ### Appending paths
 
 ```php
-use Haijin\File_Path;
+use Haijin\FilePath;
 
 // Appends another Path to a path.
-$path = new File_Path( 'user' );
-$path->append( new File_Path( 'address/street' ) );
+$path = new FilePath( 'user' );
+$path->append( new FilePath( 'address/street' ) );
 
 // Appends a path string to a path.
-$path = new File_Path( 'user' );
+$path = new FilePath( 'user' );
 $path->append( 'address/street' );
 
 // Appends a path array to a path.
-$path = new File_Path( 'user' );
+$path = new FilePath( 'user' );
 $path->append( ['address/street'] );
 ```
 
@@ -265,14 +265,14 @@ $path->append( ['address/street'] );
 ### Dropping path tails
 
 ```php
-use Haijin\File_Path;
+use Haijin\FilePath;
 
 // Drops the last part from the path.
-$path = new File_Path( 'user/address/street' );
+$path = new FilePath( 'user/address/street' );
 $path->drop();
 
 // Drops the last n parts from the path.
-$path = new File_Path( 'user/address/street' );
+$path = new FilePath( 'user/address/street' );
 $path->drop( 2 );
 ```
 
@@ -282,70 +282,70 @@ $path->drop( 2 );
 Creates an absolute path.
 
 ```php
-$path = new File_Path( '/user/address/street' );
+$path = new FilePath( '/user/address/street' );
 
-$path->is_absolute();
-$path->is_relative();
+$path->isAbsolute();
+$path->isRelative();
 ```
 
 Makes a path absolute or relative
 
 ```php
-$path = new File_Path( 'user/address/street' );
+$path = new FilePath( 'user/address/street' );
 
-$path->be_absolute();
-$path->be_absolute( false );
+$path->beAbsolute();
+$path->beAbsolute( false );
 
-$path->be_relative();
-$path->be_relative( false );
+$path->beRelative();
+$path->beRelative( false );
 ```
 
 <a name="c-2-7"></a>
-### File_Path file operations
+### FilePath file operations
 
 ```php
-public function exists_file();
+public function existsFile();
 
-public function exists_folder();
+public function existsDirectory();
 
 /**
- * Reads and returns the contents of the file at $this File_Path.
+ * Reads and returns the contents of the file at $this FilePath.
  *
- * @return string  The contents of the file at $this File_Path.
+ * @return string  The contents of the file at $this FilePath.
  */
-public function file_contents();
+public function readFileContents();
 
 /**
- * Writes the contents to the file at $this File_Path.
+ * Writes the contents to the file at $this FilePath.
  *
- * @param string  The contents to write to the file at $this File_Path.
+ * @param string  The contents to write to the file at $this FilePath.
  */
-public function write_contents($contents);
+public function writeFileContents($contents);
 
 /**
- * Recursively creates a subfolder tree from $this File_Path.
+ * Recursively creates a subdirectory tree from $this FilePath.
  */
-public function create_folder_path($permissions = 0777);
+public function createDirectoryPath($permissions = 0777);
 
 /**
- * Deletes the file or the folder with all of its contents.
+ * Deletes the file or the directory with all of its contents.
  */
 public function delete();
 
 /**
  * Deletes the file.
  */
-public function delete_file();
+public function deleteFile();
 
 /**
- * Recursively deletes the folder and its contents.
+ * Recursively deletes the directory and its contents.
  */
-public function delete_folder();
+public function deleteDirectory();
 
 /**
- * Returns the contents of the folder with the given pattern.
- * If no pattern is given returns all the files and folders that are direct
- * children from $this folder.
+ * Returns the contents of the directory with the given pattern.
+ * If no pattern is given returns all the files and directorys that are direct
+ * children from $this directory.
  */
-public function get_folder_contents($search_pattern = "*");
+public function getDirectoryContents($searchPattern = "*");
 ```

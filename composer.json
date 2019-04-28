@@ -1,5 +1,4 @@
 {
-    "minumum-stability": "dev",
     "name": "haijin/tools",
     "description": "Common tools to use in PHP applications.",
     "keywords": ["utilities", "path", "collections"],
@@ -14,26 +13,16 @@
             "role": "developer"
         }
     ],
-    "config": {
-        "platform": {
-            "php": "7.1"
-        }
-    },
-    "repositories": {
-        "haijin/specs": {
-            "type": "path",
-            "url": "../php-specs",
-            "options": {
-            "symlink": true
-            }
-        }
+    "require": {
+        "php": "^7.1"
     },
     "require-dev": {
-        "haijin/specs": "dev-development"
+        "haijin/specs": "^2.0",
+        "phpunit/php-code-coverage": "^7.0"
     },
     "autoload": {
         "psr-4": {
-            "Haijin\\": ["src/collections", "src/path", "src/closure-context", "src/debugger", "src/files-cache"]
+            "Haijin\\": ["src", "src/collections", "src/path", "src/debugger", "src/filesCache"]
         }
     },
     "scripts": {
